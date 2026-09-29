@@ -10,15 +10,17 @@ public class Creature implements Combatant {
      */
 
     private String creatureName;
-    private ConsoleLogger logger;
+    private final ConsoleLogger logger;
 
     /**
      * Base atributes
      */
     private Integer health;
-    private Integer baseAttack;
-    private Integer baseDefense;
-    private Integer baseSpeed;
+    private Integer attack;
+    private Integer defense;
+    private Integer specialAttack;
+    private Integer specialDefense;
+    private Integer speed;
 
     /**
      * state
@@ -26,12 +28,12 @@ public class Creature implements Combatant {
 
     private boolean isAlive;
 
-    public Creature(Integer health, Integer baseAttack, ConsoleLogger logger) {
+    public Creature(Integer health, Integer attack) {
 
         this.health = health;
-        this.baseAttack = baseAttack;
+        this.attack = attack;
 
-        this.logger = logger;
+        this.logger = ConsoleLogger.getInstance();
         this.initializeCreatureStats();
 
     }
@@ -48,10 +50,10 @@ public class Creature implements Combatant {
     public void attack(Creature target) {
 
         logger.battleLog(
-                this.creatureName + " dealt " + this.baseAttack +
+                this.creatureName + " dealt " + this.attack +
                         " damage to " + target.creatureName);
 
-        target.takeDamage(this.baseAttack);
+        target.takeDamage(this.attack);
 
     }
 
@@ -75,8 +77,8 @@ public class Creature implements Combatant {
      * Getters
      */
 
-    public Integer getBaseAttack() {
-        return this.baseAttack;
+    public Integer getAttack() {
+        return this.attack;
     }
 
     public Integer getHealth() {

@@ -4,8 +4,8 @@ import com.simu.utils.ConsoleLogger;
 
 public class Pikachu extends Creature {
 
-    public Pikachu(ConsoleLogger logger) {
-        super(100, 20, logger);
+    public Pikachu() {
+        super(100, 20);
         this.setCreatureName("Pikachu");
 
     }
