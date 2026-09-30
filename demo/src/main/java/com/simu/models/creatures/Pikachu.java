@@ -1,11 +1,9 @@
 package com.simu.models.creatures;
 
-import com.simu.utils.ConsoleLogger;
-
 public class Pikachu extends Creature {
 
     public Pikachu() {
-        super(100, 20);
+        super(35, 55, 40, 50, 50, 90);
         this.setCreatureName("Pikachu");
 
     }
