@@ -6,5 +6,5 @@ public interface Combatant {
 
     void attack(Creature creature);
 
-    void takeDamage(Integer damage);
+    void takeDamage(double damage);
 }

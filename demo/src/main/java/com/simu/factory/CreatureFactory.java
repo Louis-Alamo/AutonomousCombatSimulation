@@ -1,11 +1,8 @@
 package com.simu.factory;
 
-import com.simu.models.creatures.Charmander;
-import com.simu.models.creatures.Creature;
-import com.simu.models.creatures.Pikachu;
+import com.simu.models.creatures.*;
 
 public class CreatureFactory {
-
 
     public static Creature createCreature(String type) {
 
@@ -19,11 +16,18 @@ public class CreatureFactory {
                 return new Charmander();
             }
 
+            case "bulbasaur" -> {
+                return new Bulbasaur();
+            }
+
+            case "squirtle" -> {
+                return new Squirtle();
+            }
+
             default -> {
-                return new Creature(100,20);
+                return new Creature(39, 52, 43, 60, 50, 65);
             }
         }
-
 
     }
 }

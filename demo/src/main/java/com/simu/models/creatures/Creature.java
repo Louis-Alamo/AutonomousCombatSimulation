@@ -15,12 +15,15 @@ public class Creature implements Combatant {
     /**
      * Base atributes
      */
-    private Integer health;
-    private Integer attack;
-    private Integer defense;
-    private Integer specialAttack;
-    private Integer specialDefense;
-    private Integer speed;
+    private double health;
+    private double currentHealth;
+    private double attack;
+    private double defense;
+    private double specialAttack;
+    private double specialDefense;
+    private double speed;
+
+    private double baseAttack = 10.0;
 
     /**
      * state
@@ -28,10 +31,16 @@ public class Creature implements Combatant {
 
     private boolean isAlive;
 
-    public Creature(Integer health, Integer attack) {
+    public Creature(double health, double attack, double defense, double specialAttack, double specialDefense,
+            double speed) {
 
         this.health = health;
+        this.currentHealth = health;
         this.attack = attack;
+        this.defense = defense;
+        this.specialAttack = specialAttack;
+        this.specialDefense = specialDefense;
+        this.speed = speed;
 
         this.logger = ConsoleLogger.getInstance();
         this.initializeCreatureStats();
@@ -49,27 +58,33 @@ public class Creature implements Combatant {
     @Override
     public void attack(Creature target) {
 
+        double finalDamage = this.baseAttack * (this.attack / target.getDefense());
+
         logger.battleLog(
-                this.creatureName + " dealt " + this.attack +
+                this.creatureName + " dealt " + finalDamage +
                         " damage to " + target.creatureName);
 
-        target.takeDamage(this.attack);
-
+        target.takeDamage(finalDamage);
     }
 
     @Override
-    public void takeDamage(Integer damage) {
+    public void takeDamage(double damage) {
+        /**
+         * double saludActual = this.getHealth();
+         * double salud = saludActual - damage;
+         * this.setHealth(salud);
+         */
 
-        int saludActual = this.getHealth();
-        int salud = saludActual - damage;
-        this.setHealth(salud);
+        this.currentHealth -= damage;
 
-        if (this.health <= 0) {
+        if (this.currentHealth <= 0) {
             this.logger.battleLog(this.creatureName + " has been defeated.");
             this.setAlive(false);
+            return;
+
         }
 
-        this.logger.battleLog(this.creatureName + " now has " + this.getHealth() + " health");
+        this.logger.battleLog(this.creatureName + " now has " + this.getCurrentHealth() + " health");
 
     }
 
@@ -77,16 +92,28 @@ public class Creature implements Combatant {
      * Getters
      */
 
-    public Integer getAttack() {
+    public double getAttack() {
         return this.attack;
     }
 
-    public Integer getHealth() {
+    public double getHealth() {
         return this.health;
+    }
+
+    public double getDefense() {
+        return defense;
     }
 
     public String getCreatureName() {
         return this.creatureName;
+    }
+
+    public double getCurrentHealth(){
+        return this.currentHealth;
+    }
+
+    public double getSpeed() {
+        return this.speed;
     }
 
     public boolean isAlive() {
@@ -96,9 +123,6 @@ public class Creature implements Combatant {
     /**
      * Setters
      */
-    public void setHealth(Integer health) {
-        this.health = health;
-    }
 
     public void setCreatureName(String name) {
         this.creatureName = name;

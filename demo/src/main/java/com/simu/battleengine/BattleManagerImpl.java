@@ -1,7 +1,5 @@
 package com.simu.battleengine;
 
-import java.util.Random;
-
 import com.simu.models.creatures.Creature;
 import com.simu.utils.ConsoleLogger;
 
@@ -45,7 +43,7 @@ public class BattleManagerImpl implements BattleManager {
 
                 }
 
-                logger.battleLog("Round " + roundCount + "ended");
+                logger.battleLog("Round " + roundCount + " ended");
                 roundCount++;
             }
 
