@@ -27,4 +27,15 @@ public class ConsoleLogger {
         System.out.println("-- [BATTLE]: " + text);
     }
 
+    public void errorLog (String text) {
+        System.out.println("-- [ERROR]: " + text);
+    }
+
+    public void warnLog(String text) {
+        System.out.println("-- [WARN]: " + text);
+    }
+
+    public void debugLog(String text) {
+        System.out.println("-- [DEBUG]: " + text);
+    }
 }

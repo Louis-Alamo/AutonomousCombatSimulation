@@ -1,30 +1,82 @@
 package com.simu;
 
-import com.simu.battleengine.BattleManagerImpl;
+import com.simu.battleengine.battle.TurnBattleManager;
+import com.simu.contracts.BattleManager;
+import com.simu.contracts.BattleQueue;
+import com.simu.queue.TurnQueue;
 import com.simu.factory.CreatureFactory;
-import com.simu.models.creatures.Charmander;
 import com.simu.models.creatures.Creature;
-import com.simu.models.creatures.Pikachu;
 import com.simu.utils.ConsoleLogger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Hello world!
- *
  */
 public class App {
     public static void main(String[] args) {
 
         ConsoleLogger logger = ConsoleLogger.getInstance();
-        logger.infolog("Se inicio la ejecucion");
+        logger.infolog("Execution started.");
 
-        BattleManagerImpl battleManager = new BattleManagerImpl(logger);
-        
-        battleManager.startBattle(
-                CreatureFactory.createCreature("pikachu"),
-                CreatureFactory.createCreature("charmander")
+        ArrayList<Creature> creatures = new ArrayList<>(
+                List.of(
+                        CreatureFactory.createCreature("squirtle"),
+                        CreatureFactory.createCreature("charmander"),
+                        CreatureFactory.createCreature("pikachu"),
+                        CreatureFactory.createCreature("bulbasaur")
+                )
         );
 
-        logger.infolog("Se termino la ejecucion...");
+        logger.debugLog("Creatures created successfully");
+
+
+
+        BattleQueue battleQueue = new TurnQueue();
+
+
+
+        BattleManager battleManager = new TurnBattleManager(battleQueue, logger);
+        battleManager.addCombatants(creatures.get(0), creatures.get(1));
+        battleManager.startBattle();
+
+        logger.infolog("Execution finished.");
+
+        System.exit(0);
+
+        /*
+         *
+         * ArrayList<Creature> creatures = new ArrayList<>(
+         * List.of(
+         * CreatureFactory.createCreature("squirtle"),
+         * CreatureFactory.createCreature("charmander"),
+         * CreatureFactory.createCreature("pikachu"),
+         * CreatureFactory.createCreature("bulbasaur")
+         * )
+         * );
+         *
+         * TurnQueue colaBatalla = new TurnQueue(creatures);
+         *
+         *
+         * for (int i = 0; i <= 7; i++) {
+         * System.out.println("Turno " + colaBatalla.getCurrentTurn() + " Pokemon: " +
+         * colaBatalla.getNextCombatant().getCreatureName());
+         * }
+         *
+         */
+
+        // ConsoleLogger logger = ConsoleLogger.getInstance();
+        // logger.infolog("Se inicio la ejecucion");
+        //
+        // BattleManagerImpl battleManager = new BattleManagerImpl(logger);
+        //
+        // battleManager.startBattle(
+        // CreatureFactory.createCreature("pikachu"),
+        // CreatureFactory.createCreature("charmander")
+        // );
+        //
+        // logger.infolog("Se termino la ejecucion...");
 
     }
 }

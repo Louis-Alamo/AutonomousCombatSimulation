@@ -1,22 +1,35 @@
-package com.simu.battleengine;
+package com.simu.battleengine.battle;
 
+import com.simu.contracts.BattleManager;
 import com.simu.models.creatures.Creature;
 import com.simu.utils.ConsoleLogger;
 
-public class BattleManagerImpl implements BattleManager {
+public class RandomBattleManager implements BattleManager {
 
     private final ConsoleLogger logger;
 
     private Creature creatureA, creatureB;
 
-    public BattleManagerImpl(ConsoleLogger logger) {
+    public RandomBattleManager(ConsoleLogger logger) {
         this.logger = logger;
     }
 
+
     @Override
-    public void startBattle(Creature creatureA, Creature creatureB) {
+    public void addCombatants(Creature creatureA, Creature creatureB) {
+
+        if (creatureA == null || creatureB == null) {
+            throw new IllegalArgumentException("Combatants cannot be null.");
+        }
+
         this.creatureA = creatureA;
         this.creatureB = creatureB;
+
+    }
+
+    @Override
+    public void startBattle() {
+
 
         int roundCount = 1;
 

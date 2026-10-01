@@ -9,4 +9,6 @@ public interface BattleQueue {
 
     void addCreature(Creature creature);
 
+    int getCurrentRound();
+
 }
