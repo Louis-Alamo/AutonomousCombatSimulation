@@ -3,6 +3,7 @@ package com.simu.models.creatures;
 import java.util.ArrayList;
 
 import com.simu.contracts.Combatant;
+import com.simu.enums.MoveCategory;
 import com.simu.move.Move;
 import com.simu.utils.ConsoleLogger;
 
@@ -66,9 +67,12 @@ public class Creature implements Combatant {
         // Choose move firts
         Move move = this.chooseMove();
 
-        this.logger.battleLog(this.creatureName + " used " + move.getMoveName());
+        this.logger
+                .battleLog(this.creatureName + " used " + move.getMoveName());
 
-        double finalDamage = move.getMovePower() * (this.attack / target.getDefense());
+        this.logger.debugLog(move.getMoveName() + " category: " + move.getCategory());
+
+        double finalDamage = this.calculateDamage(target, move);
 
         logger.battleLog(
                 this.creatureName + " dealt " + finalDamage +
@@ -105,6 +109,16 @@ public class Creature implements Combatant {
         return this.moves.get(moveNumberRandom);
     }
 
+    private double calculateDamage(Creature target, Move move) {
+
+        return switch (move.getCategory()) {
+            case PHYSICAL -> move.getMovePower() * (this.attack / target.getDefense());
+            case SPECIAL -> move.getMovePower() * (this.specialAttack / target.getSpecialDefense());
+            default -> 0.0;
+
+        };
+    }
+
     /**
      * Getters
      */
@@ -118,7 +132,15 @@ public class Creature implements Combatant {
     }
 
     public double getDefense() {
-        return defense;
+        return this.defense;
+    }
+
+    public double getSpecialAttack() {
+        return this.specialAttack;
+    }
+
+    public double getSpecialDefense() {
+        return this.specialDefense;
     }
 
     public String getCreatureName() {

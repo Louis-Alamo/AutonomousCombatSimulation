@@ -38,7 +38,7 @@ public class App {
                     + creature.getMoves()
                             .stream()
                             .map(Move::getMoveName)
-                            .collect(Collectors.joining(" ->")));
+                            .collect(Collectors.joining(" -> ")));
 
         }
 

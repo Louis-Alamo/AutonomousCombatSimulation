@@ -95,7 +95,7 @@ public class TurnQueue implements BattleQueue {
         this.logger.warnLog("Turn order updated: "
                 + this.listCreatures.stream()
                         .map(Creature::getCreatureName)
-                        .collect(Collectors.joining("-> ")));
+                        .collect(Collectors.joining(" -> ")));
     }
 
     public int getCurrentTurnIndex() {

@@ -3,6 +3,7 @@ package com.simu.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.simu.enums.MoveCategory;
 import com.simu.move.Move;
 
 public class MoveTestData {
@@ -11,18 +12,17 @@ public class MoveTestData {
 
         ArrayList<Move> moves = new ArrayList<>(
                 List.of(
-                        new Move("Bite", 8),
-                        new Move("Scratch", 6),
-                        new Move("Tackle", 7),
-                        new Move("Whip", 9),
-                        new Move("Headbutt", 12),
-                        new Move("Claw", 10),
-                        new Move("Kick", 11),
-                        new Move("Slam", 14),
-                        new Move("Charge", 13),
-                        new Move("Crush", 16)
+                        new Move("Bite", 8, MoveCategory.PHYSICAL),
+                        new Move("Scratch", 6, MoveCategory.PHYSICAL),
+                        new Move("Tackle", 7, MoveCategory.PHYSICAL),
+                        new Move("Whip", 9, MoveCategory.PHYSICAL),
+                        new Move("Headbutt", 12, MoveCategory.PHYSICAL),
 
-                ));
+                        new Move("Energy Blast", 10, MoveCategory.SPECIAL),
+                        new Move("Shock Wave", 11, MoveCategory.SPECIAL),
+                        new Move("Flame Burst", 14, MoveCategory.SPECIAL),
+                        new Move("Water Pulse", 13, MoveCategory.SPECIAL),
+                        new Move("Energy Beam", 16, MoveCategory.SPECIAL)));
 
         ArrayList<Move> listMoves = new ArrayList<>();
 
