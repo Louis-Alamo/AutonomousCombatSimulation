@@ -4,12 +4,16 @@ import com.simu.battleengine.battle.TurnBattleManager;
 import com.simu.contracts.BattleManager;
 import com.simu.contracts.BattleQueue;
 import com.simu.queue.TurnQueue;
+import com.simu.test.MoveTestData;
 import com.simu.factory.CreatureFactory;
 import com.simu.models.creatures.Creature;
+import com.simu.move.Move;
 import com.simu.utils.ConsoleLogger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Hello world!
@@ -25,17 +29,22 @@ public class App {
                         CreatureFactory.createCreature("squirtle"),
                         CreatureFactory.createCreature("charmander"),
                         CreatureFactory.createCreature("pikachu"),
-                        CreatureFactory.createCreature("bulbasaur")
-                )
-        );
+                        CreatureFactory.createCreature("bulbasaur")));
+
+        for (Creature creature : creatures) {
+            creature.setMoves(MoveTestData.getMovesList(2));
+
+            logger.debugLog(creature.getCreatureName() + " has the following moves: "
+                    + creature.getMoves()
+                            .stream()
+                            .map(Move::getMoveName)
+                            .collect(Collectors.joining(" ->")));
+
+        }
 
         logger.debugLog("Creatures created successfully");
 
-
-
         BattleQueue battleQueue = new TurnQueue();
-
-
 
         BattleManager battleManager = new TurnBattleManager(battleQueue, logger);
         battleManager.addCombatants(creatures.get(0), creatures.get(1));

@@ -1,6 +1,9 @@
 package com.simu.models.creatures;
 
+import java.util.ArrayList;
+
 import com.simu.contracts.Combatant;
+import com.simu.move.Move;
 import com.simu.utils.ConsoleLogger;
 
 public class Creature implements Combatant {
@@ -24,6 +27,8 @@ public class Creature implements Combatant {
     private double speed;
 
     private double baseAttack = 10.0;
+
+    private ArrayList<Move> moves;
 
     /**
      * state
@@ -58,7 +63,12 @@ public class Creature implements Combatant {
     @Override
     public void attack(Creature target) {
 
-        double finalDamage = this.baseAttack * (this.attack / target.getDefense());
+        // Choose move firts
+        Move move = this.chooseMove();
+
+        this.logger.battleLog(this.creatureName + " used " + move.getMoveName());
+
+        double finalDamage = move.getMovePower() * (this.attack / target.getDefense());
 
         logger.battleLog(
                 this.creatureName + " dealt " + finalDamage +
@@ -88,6 +98,13 @@ public class Creature implements Combatant {
 
     }
 
+    public Move chooseMove() {
+
+        int moveNumberRandom = (int) (Math.random() * this.moves.size());
+
+        return this.moves.get(moveNumberRandom);
+    }
+
     /**
      * Getters
      */
@@ -108,7 +125,7 @@ public class Creature implements Combatant {
         return this.creatureName;
     }
 
-    public double getCurrentHealth(){
+    public double getCurrentHealth() {
         return this.currentHealth;
     }
 
@@ -118,6 +135,10 @@ public class Creature implements Combatant {
 
     public boolean isAlive() {
         return this.isAlive;
+    }
+
+    public ArrayList<Move> getMoves() {
+        return this.moves;
     }
 
     /**
@@ -130,5 +151,9 @@ public class Creature implements Combatant {
 
     public void setAlive(boolean alive) {
         this.isAlive = alive;
+    }
+
+    public void setMoves(ArrayList<Move> movesList) {
+        this.moves = movesList;
     }
 }
