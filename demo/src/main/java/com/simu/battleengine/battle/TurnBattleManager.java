@@ -44,11 +44,18 @@ public class TurnBattleManager implements BattleManager {
             throw new IllegalStateException("Battle is not ready to start. Combatants are required.");
         }
         logger.battleLog("The battle begins");
-
+        int cont = 0;
         while (this.creatureA.isAlive() && this.creatureB.isAlive()) {
 
             Creature creature = this.battleQueue.getNextCombatant();
-            this.logger.battleLog("Round " + this.battleQueue.getCurrentRound() + " begins");
+
+            if (this.battleQueue.isRoundActive() && cont < 1) {
+                this.logger.battleLog("Round " + this.battleQueue.getCurrentRound() + " begins");
+                ++cont;
+            }
+
+            // this.logger.battleLog("Round " + this.battleQueue.getCurrentRound() + "
+            // begins");
 
             this.logger.battleLog("It's " + creature.getCreatureName() + "'s " + " turn.");
 
@@ -60,7 +67,10 @@ public class TurnBattleManager implements BattleManager {
 
             }
 
-            this.logger.battleLog("Round " + this.battleQueue.getCurrentRound() + " ends!");
+            if (!this.battleQueue.isRoundActive()) {
+                cont = 0;
+                this.logger.battleLog("Round " + this.battleQueue.getCurrentRound() + " ends!");
+            }
         }
 
         this.endBattle();
@@ -69,7 +79,7 @@ public class TurnBattleManager implements BattleManager {
 
     @Override
     public void endBattle() {
-        this.logger.battleLog("The battle begins");
+        this.logger.battleLog("The battle ended");
         if (this.creatureA.isAlive()) {
 
             this.logger.battleLog(this.creatureA.getCreatureName() + " WINS");

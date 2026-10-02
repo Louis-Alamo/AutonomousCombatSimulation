@@ -7,6 +7,7 @@ public class Pikachu extends Creature {
         this.setCreatureName("Pikachu");
 
     }
+
     /**
      * 
      * 

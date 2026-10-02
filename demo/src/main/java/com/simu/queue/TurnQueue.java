@@ -27,8 +27,6 @@ public class TurnQueue implements BattleQueue {
     @Override
     public Creature getNextCombatant() {
 
-
-
         if (!this.isSorted) {
             this.updateTurnOrder();
         }
@@ -96,14 +94,23 @@ public class TurnQueue implements BattleQueue {
         this.isSorted = true;
         this.logger.warnLog("Turn order updated: "
                 + this.listCreatures.stream()
-                .map(Creature::getCreatureName)
-                .collect(Collectors.joining("-> "))
-        );
+                        .map(Creature::getCreatureName)
+                        .collect(Collectors.joining(" -> ")));
     }
 
     public int getCurrentTurnIndex() {
         return this.currentTurnIndex;
     }
 
+    @Override
+    public boolean isRoundActive() {
+
+        if (this.currentTurnIndex >= this.listCreatures.size()) {
+            return false;
+        }
+
+        return true;
+
+    }
 
 }
