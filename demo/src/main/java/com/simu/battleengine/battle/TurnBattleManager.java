@@ -47,6 +47,9 @@ public class TurnBattleManager implements BattleManager {
         int cont = 0;
         while (this.creatureA.isAlive() && this.creatureB.isAlive()) {
 
+            if (!this.creatureA.isCanFight() && !this.creatureB.isCanFight()) {
+                this.endBattle();
+            }
             Creature creature = this.battleQueue.getNextCombatant();
 
             if (this.battleQueue.isRoundActive() && cont < 1) {
@@ -71,7 +74,12 @@ public class TurnBattleManager implements BattleManager {
                 cont = 0;
                 this.logger.battleLog("Round " + this.battleQueue.getCurrentRound() + " ends!");
             }
+
+
+
         }
+
+
 
         this.endBattle();
 
@@ -80,6 +88,11 @@ public class TurnBattleManager implements BattleManager {
     @Override
     public void endBattle() {
         this.logger.battleLog("The battle ended");
+
+        if (!this.creatureA.isCanFight() && !this.creatureB.isCanFight()) {
+            this.logger.battleLog("The battle ended in a draw!");
+        }
+
         if (this.creatureA.isAlive()) {
 
             this.logger.battleLog(this.creatureA.getCreatureName() + " WINS");

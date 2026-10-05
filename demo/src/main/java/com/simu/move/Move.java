@@ -7,12 +7,27 @@ public class Move {
     private String moveName;
     private double movePower;
     private MoveCategory category;
+    private int currenPP;
+    private int pp;
 
-    public Move(String moveName, double movePower, MoveCategory category) {
+    private boolean isAvailable = true;
+
+    public Move(String moveName, double movePower, int pp, MoveCategory category) {
         this.moveName = moveName;
         this.movePower = movePower;
         this.category = category;
+        this.currenPP = pp;
+        this.pp = pp;
 
+    }
+
+    public boolean consumePP() {
+        if (this.currenPP <= 0) {
+            this.isAvailable = false;
+            return false;
+        }
+        this.currenPP -= 1;
+        return true;
     }
 
     public String getMoveName() {
@@ -26,4 +41,9 @@ public class Move {
     public MoveCategory getCategory() {
         return this.category;
     }
+
+    public boolean isAvailable() {
+        return this.isAvailable;
+    }
+
 }

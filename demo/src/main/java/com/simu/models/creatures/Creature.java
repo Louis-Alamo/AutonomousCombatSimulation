@@ -1,10 +1,11 @@
 package com.simu.models.creatures;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.simu.contracts.Combatant;
-import com.simu.enums.MoveCategory;
+import com.simu.contracts.MoveManager;
 import com.simu.move.Move;
+import com.simu.move.MoveManagerImpl;
 import com.simu.utils.ConsoleLogger;
 
 public class Creature implements Combatant {
@@ -27,15 +28,14 @@ public class Creature implements Combatant {
     private double specialDefense;
     private double speed;
 
-    private double baseAttack = 10.0;
-
-    private ArrayList<Move> moves;
+    private MoveManager moveManager;
 
     /**
      * state
      */
 
     private boolean isAlive;
+    private boolean canFight;
 
     public Creature(double health, double attack, double defense, double specialAttack, double specialDefense,
             double speed) {
@@ -55,6 +55,7 @@ public class Creature implements Combatant {
 
     private void initializeCreatureStats() {
         this.isAlive = true;
+        this.canFight = true;
     }
 
     /**
@@ -65,7 +66,13 @@ public class Creature implements Combatant {
     public void attack(Creature target) {
 
         // Choose move firts
-        Move move = this.chooseMove();
+        Move move = this.moveManager.chooseMove();
+
+        if (move == null) {
+
+            this.logger.battleLog(this.creatureName + "has no moves with PP remaining! It loses its turn!");
+            return;
+        }
 
         this.logger
                 .battleLog(this.creatureName + " used " + move.getMoveName());
@@ -102,13 +109,29 @@ public class Creature implements Combatant {
 
     }
 
-    public Move chooseMove() {
-
-        int moveNumberRandom = (int) (Math.random() * this.moves.size());
-
-        return this.moves.get(moveNumberRandom);
-    }
-
+    /*
+     * 
+     * Se elimino el metodo y se cambio a la implementacion de MoveManager
+     * 
+     * public Move chooseMove() {
+     * 
+     * List<Move> movesAvailable =
+     * this.moves.stream().filter(Move::isAvailable).toList();
+     * 
+     * if (movesAvailable.size() == 0) {
+     * return null;
+     * }
+     * 
+     * if (movesAvailable.size() == 1) {
+     * return this.moves.get(0);
+     * }
+     * 
+     * int moveNumberRandom = (int) (Math.random() * this.moves.size());
+     * 
+     * return this.moves.get(moveNumberRandom);
+     * 
+     * }
+     */
     private double calculateDamage(Creature target, Move move) {
 
         return switch (move.getCategory()) {
@@ -118,6 +141,8 @@ public class Creature implements Combatant {
 
         };
     }
+
+
 
     /**
      * Getters
@@ -158,9 +183,12 @@ public class Creature implements Combatant {
     public boolean isAlive() {
         return this.isAlive;
     }
+    public boolean isCanFight() {
+        return this.moveManager.hasUsableMoves();
 
-    public ArrayList<Move> getMoves() {
-        return this.moves;
+    }
+    public List<Move> getMoves() {
+        return this.moveManager.getMoves();
     }
 
     /**
@@ -175,7 +203,8 @@ public class Creature implements Combatant {
         this.isAlive = alive;
     }
 
-    public void setMoves(ArrayList<Move> movesList) {
-        this.moves = movesList;
+    public void setMoves(List<Move> movesList) {
+        this.moveManager = new MoveManagerImpl();
+        this.moveManager.addMoves(movesList);
     }
 }
