@@ -12,17 +12,17 @@ public class MoveTestData {
 
         ArrayList<Move> moves = new ArrayList<>(
                 List.of(
-                        new Move("Bite", 8, 15, MoveCategory.PHYSICAL),
-                        new Move("Scratch", 6, 25, MoveCategory.PHYSICAL),
-                        new Move("Tackle", 7, 20, MoveCategory.PHYSICAL),
-                        new Move("Whip", 9, 15, MoveCategory.PHYSICAL),
-                        new Move("Headbutt", 12, 10, MoveCategory.PHYSICAL),
+                        new Move("Bite", 8, 15, 0.40, MoveCategory.PHYSICAL),
+                        new Move("Scratch", 6, 25, 0.60, MoveCategory.PHYSICAL),
+                        new Move("Tackle", 7, 20, 0.30, MoveCategory.PHYSICAL),
+                        new Move("Whip", 9, 15, 0.50, MoveCategory.PHYSICAL),
+                        new Move("Headbutt", 12, 10, 0.20, MoveCategory.PHYSICAL),
 
-                        new Move("Energy Blast", 10, 15, MoveCategory.SPECIAL),
-                        new Move("Shock Wave", 11, 10, MoveCategory.SPECIAL),
-                        new Move("Flame Burst", 14, 5, MoveCategory.SPECIAL),
-                        new Move("Water Pulse", 13, 10, MoveCategory.SPECIAL),
-                        new Move("Energy Beam", 16, 5, MoveCategory.SPECIAL)));
+                        new Move("Energy Blast", 10, 15, 0.45, MoveCategory.SPECIAL),
+                        new Move("Shock Wave", 11, 10, 0.35, MoveCategory.SPECIAL),
+                        new Move("Flame Burst", 14, 5, 0.25, MoveCategory.SPECIAL),
+                        new Move("Water Pulse", 13, 10, 0.55, MoveCategory.SPECIAL),
+                        new Move("Energy Beam", 16, 5, 0.15, MoveCategory.SPECIAL)));
 
         ArrayList<Move> listMoves = new ArrayList<>();
 

@@ -79,6 +79,11 @@ public class Creature implements Combatant {
 
         this.logger.debugLog(move.getMoveName() + " category: " + move.getCategory());
 
+        if (!this.doesMoveHit(move)) {
+            this.logger.battleLog(this.creatureName + " used " + move.getMoveName() + " ,but it missed!");
+            return;
+        }
+
         double finalDamage = this.calculateDamage(target, move);
 
         logger.battleLog(
@@ -142,7 +147,14 @@ public class Creature implements Combatant {
         };
     }
 
+    private boolean doesMoveHit(Move move) {
 
+        double randomNumber = (Math.random());
+        this.logger
+                .debugLog("Probabilidad del movimiento: " + move.getAccuracy() + ", Numero aleatorio: " + randomNumber);
+
+        return randomNumber <= move.getAccuracy();
+    }
 
     /**
      * Getters
@@ -183,10 +195,12 @@ public class Creature implements Combatant {
     public boolean isAlive() {
         return this.isAlive;
     }
+
     public boolean isCanFight() {
         return this.moveManager.hasUsableMoves();
 
     }
+
     public List<Move> getMoves() {
         return this.moveManager.getMoves();
     }

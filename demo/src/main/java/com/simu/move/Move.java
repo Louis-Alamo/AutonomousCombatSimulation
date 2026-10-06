@@ -9,15 +9,17 @@ public class Move {
     private MoveCategory category;
     private int currenPP;
     private int pp;
+    private double accuracy;
 
     private boolean isAvailable = true;
 
-    public Move(String moveName, double movePower, int pp, MoveCategory category) {
+    public Move(String moveName, double movePower, int pp, double accuracy, MoveCategory category) {
         this.moveName = moveName;
         this.movePower = movePower;
         this.category = category;
         this.currenPP = pp;
         this.pp = pp;
+        this.accuracy = accuracy;
 
     }
 
@@ -46,4 +48,7 @@ public class Move {
         return this.isAvailable;
     }
 
+    public double getAccuracy() {
+        return this.accuracy;
+    }
 }
