@@ -5,7 +5,7 @@ import java.util.List;
 import com.simu.core.combat.contracts.Combatant;
 import com.simu.core.combat.contracts.MoveManager;
 import com.simu.core.combat.move.MoveManagerImpl;
-import com.simu.core.combat.utils.ConsoleLogger;
+import com.simu.core.utils.ConsoleLogger;
 import com.simu.core.combat.move.Move;
 
 public class Creature implements Combatant {

@@ -2,7 +2,7 @@ package com.simu.core.combat.battle;
 
 import com.simu.core.combat.contracts.BattleManager;
 import com.simu.core.combat.creatures.Creature;
-import com.simu.core.combat.utils.ConsoleLogger;
+import com.simu.core.utils.ConsoleLogger;
 
 public class RandomBattleManager implements BattleManager {
 

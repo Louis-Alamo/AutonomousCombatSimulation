@@ -8,7 +8,7 @@ import com.simu.core.combat.test.MoveTestData;
 import com.simu.core.combat.factory.CreatureFactory;
 import com.simu.core.combat.creatures.Creature;
 import com.simu.core.combat.move.Move;
-import com.simu.core.combat.utils.ConsoleLogger;
+import com.simu.core.utils.ConsoleLogger;
 
 import java.util.ArrayList;
 import java.util.List;

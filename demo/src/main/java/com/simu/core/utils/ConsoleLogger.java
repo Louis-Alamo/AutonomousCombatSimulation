@@ -1,4 +1,4 @@
-package com.simu.core.combat.utils;
+package com.simu.core.utils;
 
 import java.util.ArrayList;
 
