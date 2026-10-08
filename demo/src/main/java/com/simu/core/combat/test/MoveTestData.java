@@ -10,19 +10,89 @@ public class MoveTestData {
 
     public static ArrayList<Move> getMovesList(int moveCount) {
 
-        ArrayList<Move> moves = new ArrayList<>(
+        List<Move> moves = new ArrayList<>(
                 List.of(
-                        new Move("Bite", 8, 15, 0.40, MoveCategory.PHYSICAL),
-                        new Move("Scratch", 6, 25, 0.60, MoveCategory.PHYSICAL),
-                        new Move("Tackle", 7, 20, 0.30, MoveCategory.PHYSICAL),
-                        new Move("Whip", 9, 15, 0.50, MoveCategory.PHYSICAL),
-                        new Move("Headbutt", 12, 10, 0.20, MoveCategory.PHYSICAL),
+                        Move.builder()
+                                .moveName("Bite")
+                                .movePower(8)
+                                .pp(15)
+                                .accuracy(0.40)
+                                .moveCategory(MoveCategory.PHYSICAL)
+                                .build(),
 
-                        new Move("Energy Blast", 10, 15, 0.45, MoveCategory.SPECIAL),
-                        new Move("Shock Wave", 11, 10, 0.35, MoveCategory.SPECIAL),
-                        new Move("Flame Burst", 14, 5, 0.25, MoveCategory.SPECIAL),
-                        new Move("Water Pulse", 13, 10, 0.55, MoveCategory.SPECIAL),
-                        new Move("Energy Beam", 16, 5, 0.15, MoveCategory.SPECIAL)));
+                        Move.builder()
+                                .moveName("Scratch")
+                                .movePower(6)
+                                .pp(25)
+                                .accuracy(0.60)
+                                .moveCategory(MoveCategory.PHYSICAL)
+                                .build(),
+
+                        Move.builder()
+                                .moveName("Tackle")
+                                .movePower(7)
+                                .pp(20)
+                                .accuracy(0.30)
+                                .moveCategory(MoveCategory.PHYSICAL)
+                                .build(),
+
+                        Move.builder()
+                                .moveName("Whip")
+                                .movePower(9)
+                                .pp(15)
+                                .accuracy(0.50)
+                                .moveCategory(MoveCategory.PHYSICAL)
+                                .build(),
+
+                        Move.builder()
+                                .moveName("Headbutt")
+                                .movePower(12)
+                                .pp(10)
+                                .accuracy(0.20)
+                                .moveCategory(MoveCategory.PHYSICAL)
+                                .build(),
+
+                        Move.builder()
+                                .moveName("Energy Blast")
+                                .movePower(10)
+                                .pp(15)
+                                .accuracy(0.45)
+                                .moveCategory(MoveCategory.SPECIAL)
+                                .build(),
+
+                        Move.builder()
+                                .moveName("Shock Wave")
+                                .movePower(11)
+                                .pp(10)
+                                .accuracy(0.35)
+                                .moveCategory(MoveCategory.SPECIAL)
+                                .build(),
+
+                        Move.builder()
+                                .moveName("Flame Burst")
+                                .movePower(14)
+                                .pp(5)
+                                .accuracy(0.25)
+                                .moveCategory(MoveCategory.SPECIAL)
+                                .build(),
+
+                        Move.builder()
+                                .moveName("Water Pulse")
+                                .movePower(13)
+                                .pp(10)
+                                .accuracy(0.55)
+                                .moveCategory(MoveCategory.SPECIAL)
+                                .build(),
+
+                        Move.builder()
+                                .moveName("Energy Beam")
+                                .movePower(16)
+                                .pp(5)
+                                .accuracy(0.15)
+                                .moveCategory(MoveCategory.SPECIAL)
+                                .build()
+                )
+        );
 
         ArrayList<Move> listMoves = new ArrayList<>();
 

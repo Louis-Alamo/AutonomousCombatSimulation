@@ -13,16 +13,18 @@ public class Move {
 
     private boolean isAvailable = true;
 
-    public Move(String moveName, double movePower, int pp, double accuracy, MoveCategory category) {
-        this.moveName = moveName;
-        this.movePower = movePower;
-        this.category = category;
-        this.currenPP = pp;
-        this.pp = pp;
-        this.accuracy = accuracy;
-
+    private Move(Builder builder) {
+        this.moveName = builder.moveName;
+        this.movePower = builder.movePower;
+        this.category = builder.moveCategory;
+        this.pp = builder.pp;
+        this.currenPP = builder.pp;
+        this.accuracy = builder.accuracy;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
     public boolean consumePP() {
         if (this.currenPP <= 0) {
             this.isAvailable = false;
@@ -51,4 +53,47 @@ public class Move {
     public double getAccuracy() {
         return this.accuracy;
     }
+
+
+    //Builder
+    public static class Builder {
+
+        private String moveName;
+        private double movePower;
+        private MoveCategory moveCategory;
+        private int pp;
+        private double accuracy;
+
+        public Builder moveName(String moveName) {
+            this.moveName = moveName;
+            return this;
+        }
+
+        public Builder movePower(double movePower) {
+            this.movePower = movePower;
+            return this;
+        }
+
+        public Builder moveCategory(MoveCategory moveCategory) {
+            this.moveCategory = moveCategory;
+            return this;
+        }
+
+        public Builder pp(int pp) {
+            this.pp = pp;
+            return this;
+        }
+
+        public Builder accuracy(double accuracy) {
+            this.accuracy = accuracy;
+            return this;
+        }
+
+        public Move build() {
+            return new Move(this);
+        }
+    }
+
 }
+
+
