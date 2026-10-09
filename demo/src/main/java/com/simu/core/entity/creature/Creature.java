@@ -41,6 +41,7 @@ public class Creature implements Combatant {
     private boolean canFight = true;
 
     private Creature(Builder builder) {
+        this.creatureName = builder.creatureName;
         this.healthComponent = builder.healthComponent;
         this.attack = builder.attack;
         this.defense = builder.defense;
@@ -305,6 +306,11 @@ public class Creature implements Combatant {
 
         private boolean isAlive;
         private boolean canFight;
+
+        public Builder creatureName(String creatureName) {
+            this.creatureName = creatureName;
+            return this;
+        }
 
         public Builder healthComponent(HealthComponent healthComponent) {
             this.healthComponent = healthComponent;

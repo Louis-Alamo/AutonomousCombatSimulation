@@ -25,7 +25,7 @@ public class CreatureFactory {
             }
 
             default -> {
-                return new Creature(39, 52, 43, 60, 50, 65);
+                return null;
             }
         }
 
