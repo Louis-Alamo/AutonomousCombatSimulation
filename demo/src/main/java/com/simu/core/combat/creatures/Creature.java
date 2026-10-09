@@ -1,8 +1,12 @@
 package com.simu.core.combat.creatures;
 
+import java.io.Console;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.simu.core.combat.component.health.HealthComponent;
 import com.simu.core.combat.contracts.Combatant;
+import com.simu.core.combat.contracts.IBuilder;
 import com.simu.core.combat.contracts.MoveManager;
 import com.simu.core.combat.enums.ElementType;
 import com.simu.core.combat.move.MoveManagerImpl;
@@ -17,13 +21,15 @@ public class Creature implements Combatant {
      */
 
     private String creatureName;
-    private final ConsoleLogger logger;
+    private ConsoleLogger logger;
 
     /**
      * Base atributes
      */
     private double health;
     private double currentHealth;
+
+    private HealthComponent healthComponent;
     private double attack;
     private double defense;
     private double specialAttack;
@@ -34,32 +40,20 @@ public class Creature implements Combatant {
 
     private MoveManager moveManager;
 
-    /**
-     * state
-     */
+    private boolean isAlive = true;
+    private boolean canFight = true;
 
-    private boolean isAlive;
-    private boolean canFight;
-
-    public Creature(double health, double attack, double defense, double specialAttack, double specialDefense,
-            double speed) {
-
-        this.health = health;
-        this.currentHealth = health;
-        this.attack = attack;
-        this.defense = defense;
-        this.specialAttack = specialAttack;
-        this.specialDefense = specialDefense;
-        this.speed = speed;
+    private Creature(Builder builder) {
+        this.healthComponent = builder.healthComponent;
+        this.attack = builder.attack;
+        this.defense = builder.defense;
+        this.specialAttack = builder.specialAttack;
+        this.specialDefense = builder.specialDefense;
+        this.speed = builder.speed;
+        this.elementTypes = builder.elementTypes;
+        this.moveManager = builder.moveManager;
 
         this.logger = ConsoleLogger.getInstance();
-        this.initializeCreatureStats();
-
-    }
-
-    private void initializeCreatureStats() {
-        this.isAlive = true;
-        this.canFight = true;
     }
 
     /**
@@ -81,7 +75,8 @@ public class Creature implements Combatant {
         this.logger
                 .battleLog(this.creatureName + " used " + move.getMoveName());
 
-        this.logger.debugLog(move.getMoveName() + " category: " + move.getCategory() + " and element type " + move.getElementType());
+        this.logger.debugLog(
+                move.getMoveName() + " category: " + move.getCategory() + " and element type " + move.getElementType());
 
         if (!this.doesMoveHit(move)) {
             this.logger.battleLog(this.creatureName + " used " + move.getMoveName() + " ,but it missed!");
@@ -91,7 +86,7 @@ public class Creature implements Combatant {
         double finalDamage = this.calculateDamage(target, move);
         this.logger.battleLog("Damage calculated " + finalDamage);
 
-        //Calculate the final damage
+        // Calculate the final damage
         finalDamage = finalDamage * this.calculateTypeMultiplier(target, move) * this.calculateStabMultiplier(move);
 
         logger.battleLog(
@@ -109,16 +104,21 @@ public class Creature implements Combatant {
          * this.setHealth(salud);
          */
 
-        this.currentHealth -= damage;
+        /*
+         * this.currentHealth -= damage;
+         * 
+         * if (this.currentHealth <= 0) {
+         * this.logger.battleLog(this.creatureName + " has been defeated.");
+         * this.setAlive(false);
+         * return;
+         * 
+         * }
+         * 
+         * this.logger.battleLog(this.creatureName + " now has " +
+         * this.getCurrentHealth() + " health");
+         */
 
-        if (this.currentHealth <= 0) {
-            this.logger.battleLog(this.creatureName + " has been defeated.");
-            this.setAlive(false);
-            return;
-
-        }
-
-        this.logger.battleLog(this.creatureName + " now has " + this.getCurrentHealth() + " health");
+        this.healthComponent.takeDamage(damage);
 
     }
 
@@ -151,30 +151,29 @@ public class Creature implements Combatant {
 
             case PHYSICAL -> move.getMovePower() * (this.attack / target.getDefense());
             case SPECIAL -> move.getMovePower() * (this.specialAttack / target.getSpecialDefense());
-            case TRUE_DAMAGE ->  move.getMovePower();
+            case TRUE_DAMAGE -> move.getMovePower();
             default -> 0.0;
 
         };
     }
 
     private double calculateTypeMultiplier(Creature target, Move move) {
-        double typeMultiplier  = 1;
+        double typeMultiplier = 1;
 
         logger.debugLog(
                 "Target element types: "
-                        + target.getElementTypes()
-        );
+                        + target.getElementTypes());
 
-        for (ElementType defenderType: target.getElementTypes()) {
+        for (ElementType defenderType : target.getElementTypes()) {
             logger.debugLog(
                     move.getElementType()
                             + " -> "
                             + defenderType
                             + " = "
                             + move.getElementType()
-                            .getMultiplierAgainst(defenderType));
+                                    .getMultiplierAgainst(defenderType));
 
-            typeMultiplier  *= move.getElementType().getMultiplierAgainst(defenderType);
+            typeMultiplier *= move.getElementType().getMultiplierAgainst(defenderType);
         }
 
         this.logger.debugLog("The move has a " + typeMultiplier + " damage multiplier!");
@@ -244,7 +243,7 @@ public class Creature implements Combatant {
     }
 
     public boolean isAlive() {
-        return this.isAlive;
+        return this.healthComponent.isDead();
     }
 
     public boolean isCanFight() {
@@ -290,5 +289,74 @@ public class Creature implements Combatant {
         this.elementTypes = elementTypes;
     }
 
+    public static class Builder implements IBuilder {
+
+        private String creatureName;
+        private ConsoleLogger logger;
+
+        /**
+         * Base atributes
+         */
+        private HealthComponent healthComponent;
+        private double attack;
+        private double defense;
+        private double specialAttack;
+        private double specialDefense;
+        private double speed;
+        private List<ElementType> elementTypes;
+        private MoveManager moveManager;
+
+        private boolean isAlive;
+        private boolean canFight;
+
+        public Builder healthComponent(HealthComponent healthComponent) {
+            this.healthComponent = healthComponent;
+            return this;
+        }
+
+        public Builder attack(double attack) {
+            this.attack = attack;
+            return this;
+        }
+
+        public Builder defense(double defense) {
+            this.defense = defense;
+            return this;
+        }
+
+        public Builder specialAttack(double specialAttack) {
+            this.specialAttack = specialAttack;
+            return this;
+        }
+
+        public Builder specialDefense(double specialDefense) {
+            this.specialDefense = specialDefense;
+            return this;
+        }
+
+        public Builder speed(double speed) {
+            this.speed = speed;
+            return this;
+        }
+
+        public Builder elementTypes(ElementType... types) {
+
+            if (types.length > 2) {
+                throw new IllegalArgumentException("A creature cannot have more than 2 element types");
+            }
+            this.elementTypes.addAll(List.of(types));
+            return this;
+        }
+
+        public Builder moveManager(MoveManager moveManager) {
+            this.moveManager = moveManager;
+            return this;
+        }
+
+        @Override
+        public Creature build() {
+            return null;
+        }
+    }
 
 }
