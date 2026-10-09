@@ -1,18 +1,17 @@
 package com.simu;
 
-import com.simu.battleengine.battle.TurnBattleManager;
-import com.simu.contracts.BattleManager;
-import com.simu.contracts.BattleQueue;
-import com.simu.queue.TurnQueue;
-import com.simu.test.MoveTestData;
-import com.simu.factory.CreatureFactory;
-import com.simu.models.creatures.Creature;
-import com.simu.move.Move;
-import com.simu.utils.ConsoleLogger;
+import com.simu.core.combat.battle.TurnBattleManager;
+import com.simu.core.combat.contracts.BattleManager;
+import com.simu.core.combat.contracts.BattleQueue;
+import com.simu.core.combat.queue.TurnQueue;
+import com.simu.core.combat.test.MoveTestData;
+import com.simu.core.combat.factory.CreatureFactory;
+import com.simu.core.combat.creatures.Creature;
+import com.simu.core.combat.move.Move;
+import com.simu.core.combat.utils.ConsoleLogger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
