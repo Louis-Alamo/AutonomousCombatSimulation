@@ -1,4 +1,4 @@
-package com.simu.core.combat.test;
+package com.simu.core.test;
 
 public class SimulationRunner {
 

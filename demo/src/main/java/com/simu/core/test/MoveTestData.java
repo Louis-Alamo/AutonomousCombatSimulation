@@ -1,11 +1,11 @@
-package com.simu.core.combat.test;
+package com.simu.core.test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.simu.core.combat.enums.ElementType;
-import com.simu.core.combat.enums.MoveCategory;
-import com.simu.core.combat.move.Move;
+import com.simu.core.enums.ElementType;
+import com.simu.core.enums.MoveCategory;
+import com.simu.core.entity.move.Move;
 
 public class MoveTestData {
 

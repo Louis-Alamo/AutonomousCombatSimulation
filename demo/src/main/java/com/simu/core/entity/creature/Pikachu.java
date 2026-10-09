@@ -1,4 +1,4 @@
-package com.simu.core.combat.creatures;
+package com.simu.core.entity.creature;
 
 public class Pikachu extends Creature {
 

@@ -1,6 +1,6 @@
-package com.simu.core.combat.factory;
+package com.simu.core.factory;
 
-import com.simu.core.combat.creatures.*;
+import com.simu.core.entity.creature.*;
 
 public class CreatureFactory {
 

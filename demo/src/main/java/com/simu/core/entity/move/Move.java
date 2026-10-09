@@ -1,7 +1,7 @@
-package com.simu.core.combat.move;
+package com.simu.core.entity.move;
 
-import com.simu.core.combat.enums.ElementType;
-import com.simu.core.combat.enums.MoveCategory;
+import com.simu.core.enums.ElementType;
+import com.simu.core.enums.MoveCategory;
 
 public class Move {
 

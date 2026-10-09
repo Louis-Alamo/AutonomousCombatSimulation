@@ -1,4 +1,4 @@
-package com.simu.core.combat.enums;
+package com.simu.core.enums;
 
 public enum MoveCategory {
     PHYSICAL,

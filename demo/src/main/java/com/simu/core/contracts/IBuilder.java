@@ -1,4 +1,4 @@
-package com.simu.core.combat.contracts;
+package com.simu.core.contracts;
 
 public interface IBuilder<T> {
 

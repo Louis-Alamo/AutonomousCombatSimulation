@@ -1,18 +1,15 @@
-package com.simu.core.combat.creatures;
+package com.simu.core.entity.creature;
 
-import java.io.Console;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.simu.core.combat.component.health.HealthComponent;
-import com.simu.core.combat.contracts.Combatant;
-import com.simu.core.combat.contracts.IBuilder;
-import com.simu.core.combat.contracts.MoveManager;
-import com.simu.core.combat.enums.ElementType;
-import com.simu.core.combat.move.MoveManagerImpl;
-import com.simu.core.enums.Type;
+import com.simu.core.contracts.Combatant;
+import com.simu.core.contracts.IBuilder;
+import com.simu.core.contracts.MoveManager;
+import com.simu.core.enums.ElementType;
+import com.simu.core.entity.move.MoveManagerImpl;
 import com.simu.core.utils.ConsoleLogger;
-import com.simu.core.combat.move.Move;
+import com.simu.core.entity.move.Move;
 
 public class Creature implements Combatant {
 

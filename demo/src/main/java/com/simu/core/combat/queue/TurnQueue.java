@@ -1,8 +1,8 @@
 package com.simu.core.combat.queue;
 
-import com.simu.core.combat.contracts.BattleQueue;
+import com.simu.core.contracts.BattleQueue;
 import com.simu.core.utils.ConsoleLogger;
-import com.simu.core.combat.creatures.Creature;
+import com.simu.core.entity.creature.Creature;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;

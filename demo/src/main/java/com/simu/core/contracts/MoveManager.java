@@ -1,8 +1,8 @@
-package com.simu.core.combat.contracts;
+package com.simu.core.contracts;
 
 import java.util.List;
 
-import com.simu.core.combat.move.Move;
+import com.simu.core.entity.move.Move;
 
 public interface MoveManager {
 

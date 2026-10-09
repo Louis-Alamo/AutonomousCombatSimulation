@@ -1,6 +1,6 @@
-package com.simu.core.combat.contracts;
+package com.simu.core.contracts;
 
-import com.simu.core.combat.creatures.Creature;
+import com.simu.core.entity.creature.Creature;
 
 public interface Combatant {
 
