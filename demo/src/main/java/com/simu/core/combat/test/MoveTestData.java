@@ -3,6 +3,7 @@ package com.simu.core.combat.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.simu.core.combat.enums.ElementType;
 import com.simu.core.combat.enums.MoveCategory;
 import com.simu.core.combat.move.Move;
 
@@ -16,80 +17,90 @@ public class MoveTestData {
                                 .moveName("Bite")
                                 .movePower(8)
                                 .pp(15)
-                                .accuracy(0.40)
+                                .accuracy(0.90)
                                 .moveCategory(MoveCategory.PHYSICAL)
+                                .elementType(ElementType.DARK)
                                 .build(),
 
                         Move.builder()
                                 .moveName("Scratch")
                                 .movePower(6)
                                 .pp(25)
-                                .accuracy(0.60)
+                                .accuracy(1.00)
                                 .moveCategory(MoveCategory.PHYSICAL)
+                                .elementType(ElementType.NORMAL)
                                 .build(),
 
                         Move.builder()
                                 .moveName("Tackle")
                                 .movePower(7)
                                 .pp(20)
-                                .accuracy(0.30)
+                                .accuracy(0.95)
                                 .moveCategory(MoveCategory.PHYSICAL)
+                                .elementType(ElementType.NORMAL)
                                 .build(),
 
                         Move.builder()
                                 .moveName("Whip")
                                 .movePower(9)
                                 .pp(15)
-                                .accuracy(0.50)
+                                .accuracy(0.90)
                                 .moveCategory(MoveCategory.PHYSICAL)
+                                .elementType(ElementType.GRASS)
                                 .build(),
 
                         Move.builder()
                                 .moveName("Headbutt")
                                 .movePower(12)
                                 .pp(10)
-                                .accuracy(0.20)
+                                .accuracy(0.85)
                                 .moveCategory(MoveCategory.PHYSICAL)
+                                .elementType(ElementType.NORMAL)
                                 .build(),
 
                         Move.builder()
                                 .moveName("Energy Blast")
                                 .movePower(10)
                                 .pp(15)
-                                .accuracy(0.45)
+                                .accuracy(0.90)
                                 .moveCategory(MoveCategory.SPECIAL)
+                                .elementType(ElementType.PSYCHIC)
                                 .build(),
 
                         Move.builder()
                                 .moveName("Shock Wave")
                                 .movePower(11)
                                 .pp(10)
-                                .accuracy(0.35)
+                                .accuracy(0.90)
                                 .moveCategory(MoveCategory.SPECIAL)
+                                .elementType(ElementType.ELECTRIC)
                                 .build(),
 
                         Move.builder()
                                 .moveName("Flame Burst")
                                 .movePower(14)
                                 .pp(5)
-                                .accuracy(0.25)
+                                .accuracy(0.80)
                                 .moveCategory(MoveCategory.SPECIAL)
+                                .elementType(ElementType.FIRE)
                                 .build(),
 
                         Move.builder()
                                 .moveName("Water Pulse")
                                 .movePower(13)
                                 .pp(10)
-                                .accuracy(0.55)
+                                .accuracy(0.85)
                                 .moveCategory(MoveCategory.SPECIAL)
+                                .elementType(ElementType.WATER)
                                 .build(),
 
                         Move.builder()
                                 .moveName("Energy Beam")
                                 .movePower(16)
                                 .pp(5)
-                                .accuracy(0.15)
+                                .accuracy(0.75)
                                 .moveCategory(MoveCategory.SPECIAL)
+                                .elementType(ElementType.GRASS)
                                 .build()
                 )
         );

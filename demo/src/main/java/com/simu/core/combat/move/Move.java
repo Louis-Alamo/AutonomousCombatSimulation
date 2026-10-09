@@ -1,5 +1,6 @@
 package com.simu.core.combat.move;
 
+import com.simu.core.combat.enums.ElementType;
 import com.simu.core.combat.enums.MoveCategory;
 
 public class Move {
@@ -10,6 +11,7 @@ public class Move {
     private int currenPP;
     private int pp;
     private double accuracy;
+    private ElementType elementType;
 
     private boolean isAvailable = true;
 
@@ -20,6 +22,7 @@ public class Move {
         this.pp = builder.pp;
         this.currenPP = builder.pp;
         this.accuracy = builder.accuracy;
+        this.elementType = builder.elementType;
     }
 
     public static Builder builder() {
@@ -54,6 +57,9 @@ public class Move {
         return this.accuracy;
     }
 
+    public ElementType getElementType() {
+        return this.elementType;
+    }
 
     //Builder
     public static class Builder {
@@ -63,6 +69,7 @@ public class Move {
         private MoveCategory moveCategory;
         private int pp;
         private double accuracy;
+        private ElementType elementType;
 
         public Builder moveName(String moveName) {
             this.moveName = moveName;
@@ -86,6 +93,11 @@ public class Move {
 
         public Builder accuracy(double accuracy) {
             this.accuracy = accuracy;
+            return this;
+        }
+
+        public Builder elementType(ElementType elementType) {
+            this.elementType = elementType;
             return this;
         }
 

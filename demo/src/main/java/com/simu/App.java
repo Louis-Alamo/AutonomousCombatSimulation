@@ -3,6 +3,7 @@ package com.simu;
 import com.simu.core.combat.battle.TurnBattleManager;
 import com.simu.core.combat.contracts.BattleManager;
 import com.simu.core.combat.contracts.BattleQueue;
+import com.simu.core.combat.enums.ElementType;
 import com.simu.core.combat.queue.TurnQueue;
 import com.simu.core.combat.test.MoveTestData;
 import com.simu.core.combat.factory.CreatureFactory;
@@ -38,8 +39,26 @@ public class App {
                             .stream()
                             .map(Move::getMoveName)
                             .collect(Collectors.joining(" -> ")));
-
         }
+
+        creatures.get(0).setElementTypes(
+                List.of(ElementType.WATER)
+        );
+
+        creatures.get(1).setElementTypes(
+                List.of(ElementType.FIRE)
+        );
+
+        creatures.get(2).setElementTypes(
+                List.of(ElementType.ELECTRIC)
+        );
+
+        creatures.get(3).setElementTypes(
+                List.of(
+                        ElementType.GRASS,
+                        ElementType.POISON
+                )
+        );
 
         logger.debugLog("Creatures created successfully");
 
