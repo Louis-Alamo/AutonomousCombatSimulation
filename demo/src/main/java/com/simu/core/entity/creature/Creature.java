@@ -1,5 +1,6 @@
 package com.simu.core.entity.creature;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.simu.core.combat.component.health.HealthComponent;
@@ -8,6 +9,7 @@ import com.simu.core.contracts.IBuilder;
 import com.simu.core.contracts.MoveManager;
 import com.simu.core.enums.ElementType;
 import com.simu.core.entity.move.MoveManagerImpl;
+import com.simu.core.enums.MoveID;
 import com.simu.core.utils.ConsoleLogger;
 import com.simu.core.entity.move.Move;
 
@@ -23,8 +25,6 @@ public class Creature implements Combatant {
     /**
      * Base atributes
      */
-    private double health;
-    private double currentHealth;
 
     private HealthComponent healthComponent;
     private double attack;
@@ -54,6 +54,39 @@ public class Creature implements Combatant {
         this.logger = ConsoleLogger.getInstance();
     }
 
+    public void creatureDataView(){
+            System.out.println("====================================");
+            System.out.println("Creature: " + this.creatureName);
+            System.out.println("====================================");
+
+            System.out.println("HP: " + this.healthComponent.getHealth());
+            System.out.println("Attack: " + this.attack);
+            System.out.println("Defense: " + this.defense);
+            System.out.println("Special Attack: " + this.specialAttack);
+            System.out.println("Special Defense: " + this.specialDefense);
+            System.out.println("Speed: " + this.speed);
+
+            System.out.println("\nElement Types:");
+
+            for (ElementType type : this.elementTypes) {
+                System.out.println("- " + type);
+            }
+
+            System.out.println("\nMoves:");
+
+            for (Move move : this.getMoves()) {
+                System.out.println(
+                        "- " + move.getMoveName()
+                                + " | Type: " + move.getElementType()
+                                + " | Power: " + move.getMovePower()
+                                + " | PP: " + move.getCurrentPP() + "/" + move.getPP()
+                );
+            }
+
+            System.out.println("====================================");
+
+    }
+
     /**
      * Behaviors
      */
@@ -81,7 +114,7 @@ public class Creature implements Combatant {
             return;
         }
 
-        double finalDamage = this.calculateDamage(target, move);
+        double finalDamage = this.calculateDamage(target, move); // <---
         this.logger.battleLog("Damage calculated " + finalDamage);
 
         // Calculate the final damage
@@ -147,9 +180,9 @@ public class Creature implements Combatant {
 
         return switch (move.getCategory()) {
 
-            case PHYSICAL -> move.getMovePower() * (this.attack / target.getDefense());
-            case SPECIAL -> move.getMovePower() * (this.specialAttack / target.getSpecialDefense());
-            case TRUE_DAMAGE -> move.getMovePower();
+            case PHYSICAL -> move.getMovePower() * (this.attack / target.getDefense()) * this.SCALE_DAMAGE ;
+            case SPECIAL -> move.getMovePower() * (this.specialAttack / target.getSpecialDefense()) * this.SCALE_DAMAGE;
+            case TRUE_DAMAGE -> move.getMovePower() * this.SCALE_DAMAGE;
             default -> 0.0;
 
         };
@@ -208,12 +241,9 @@ public class Creature implements Combatant {
      * Getters
      */
 
+
     public double getAttack() {
         return this.attack;
-    }
-
-    public double getHealth() {
-        return this.health;
     }
 
     public double getDefense() {
@@ -223,7 +253,6 @@ public class Creature implements Combatant {
     public double getSpecialAttack() {
         return this.specialAttack;
     }
-
     public double getSpecialDefense() {
         return this.specialDefense;
     }
@@ -232,13 +261,6 @@ public class Creature implements Combatant {
         return this.creatureName;
     }
 
-    public double getCurrentHealth() {
-        return this.currentHealth;
-    }
-
-    public double getSpeed() {
-        return this.speed;
-    }
 
     public boolean isAlive() {
         return this.healthComponent.isDead();
@@ -287,6 +309,10 @@ public class Creature implements Combatant {
         this.elementTypes = elementTypes;
     }
 
+    public double getSpeed() {
+        return this.speed;
+    }
+
     public static class Builder implements IBuilder {
 
         private String creatureName;
@@ -301,7 +327,7 @@ public class Creature implements Combatant {
         private double specialAttack;
         private double specialDefense;
         private double speed;
-        private List<ElementType> elementTypes;
+        private List<ElementType> elementTypes = new ArrayList<>();;
         private MoveManager moveManager;
 
         private boolean isAlive;
@@ -351,14 +377,14 @@ public class Creature implements Combatant {
             return this;
         }
 
-        public Builder moveManager(MoveManager moveManager) {
-            this.moveManager = moveManager;
+        public Builder moveManager(MoveID...moveIDS) {
+            this.moveManager = new MoveManagerImpl(moveIDS);
             return this;
         }
 
         @Override
         public Creature build() {
-            return null;
+            return new Creature(this);
         }
     }
 

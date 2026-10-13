@@ -8,4 +8,6 @@ public interface HealthComponent {
 
     boolean isDead();
 
+    double getHealth();
+
 }

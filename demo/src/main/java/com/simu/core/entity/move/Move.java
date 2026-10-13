@@ -61,6 +61,14 @@ public class Move {
         return this.elementType;
     }
 
+    public int getCurrentPP() {
+        return this.currenPP;
+    }
+
+    public int getPP() {
+        return this.pp;
+    }
+
     //Builder
     public static class Builder {
 

@@ -1,13 +1,29 @@
 package com.simu.core.entity.move;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.simu.core.contracts.MoveManager;
+import com.simu.core.enums.MoveID;
+import com.simu.core.factory.MoveFactory;
 
 public class MoveManagerImpl implements MoveManager {
 
-    List<Move> moves;
-    List<Move> movesAvailables;
+    private List<Move> moves = new ArrayList<>();;
+    private List<Move> movesAvailables = new ArrayList<>();
+
+
+    public MoveManagerImpl(MoveID...moveIDS) {
+
+        for(MoveID moveId: moveIDS) {
+            this.moves.add(
+                    MoveFactory.createMove(moveId)
+            );
+        }
+
+    }
+
+    public MoveManagerImpl() {}
 
     @Override
     public boolean hasUsableMoves() {
@@ -43,4 +59,7 @@ public class MoveManagerImpl implements MoveManager {
     public List<Move> getMoves() {
         return this.moves;
     }
+
+
+
 }

@@ -38,6 +38,11 @@ public class StandarHealthComponentImpl implements HealthComponent{
         return this.isAlive;
     }
 
+    @Override
+    public double getHealth() {
+        return this.max_health;
+    }
+
     public double getCurrentHealth() {
         return currentHealth;
     }

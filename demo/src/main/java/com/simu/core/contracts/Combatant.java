@@ -7,6 +7,7 @@ public interface Combatant {
     int MAX_TYPES = 2;
     int MAX_MOVES = 4;
 
+    double SCALE_DAMAGE = 0.25;
     double STAB_MULTIPLIER = 1.5;
 
     void attack(Creature creature);

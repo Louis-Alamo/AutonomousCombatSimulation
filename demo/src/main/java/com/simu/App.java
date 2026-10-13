@@ -1,18 +1,18 @@
 package com.simu;
 
+
 import com.simu.core.combat.battle.TurnBattleManager;
+import com.simu.core.combat.queue.TurnQueue;
 import com.simu.core.contracts.BattleManager;
 import com.simu.core.contracts.BattleQueue;
-import com.simu.core.enums.ElementType;
-import com.simu.core.combat.queue.TurnQueue;
-import com.simu.core.test.MoveTestData;
-import com.simu.core.factory.CreatureFactory;
 import com.simu.core.entity.creature.Creature;
-import com.simu.core.entity.move.Move;
+import com.simu.core.enums.CreatureID;
+import com.simu.core.factory.CreatureFactory;
 import com.simu.core.utils.ConsoleLogger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -26,41 +26,17 @@ public class App {
 
         ArrayList<Creature> creatures = new ArrayList<>(
                 List.of(
-                        CreatureFactory.createCreature("squirtle"),
-                        CreatureFactory.createCreature("charmander"),
-                        CreatureFactory.createCreature("pikachu"),
-                        CreatureFactory.createCreature("bulbasaur")));
+                        Objects.requireNonNull(CreatureFactory.createCreature(CreatureID.SQUIRTLE)),
+                        Objects.requireNonNull(CreatureFactory.createCreature(CreatureID.CHARMANDER)),
+                        Objects.requireNonNull(CreatureFactory.createCreature(CreatureID.PIKACHU)),
+                        Objects.requireNonNull(CreatureFactory.createCreature(CreatureID.BULBASAUR))
+                ));
 
-        for (Creature creature : creatures) {
-            creature.setMoves(MoveTestData.getMovesList(2));
-
-            logger.debugLog(creature.getCreatureName() + " has the following moves: "
-                    + creature.getMoves()
-                            .stream()
-                            .map(Move::getMoveName)
-                            .collect(Collectors.joining(" -> ")));
-        }
-
-        creatures.get(0).setElementTypes(
-                List.of(ElementType.WATER)
-        );
-
-        creatures.get(1).setElementTypes(
-                List.of(ElementType.FIRE)
-        );
-
-        creatures.get(2).setElementTypes(
-                List.of(ElementType.ELECTRIC)
-        );
-
-        creatures.get(3).setElementTypes(
-                List.of(
-                        ElementType.GRASS,
-                        ElementType.POISON
-                )
-        );
 
         logger.debugLog("Creatures created successfully");
+
+        creatures.forEach(Creature::creatureDataView);
+
 
         BattleQueue battleQueue = new TurnQueue();
 
