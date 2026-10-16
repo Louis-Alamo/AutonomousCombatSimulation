@@ -3,8 +3,6 @@ package com.simu;
 
 import com.simu.core.combat.battle.BattleManagerImpl;
 import com.simu.core.combat.battle.CombatManagerImpl;
-import com.simu.core.combat.battle.TurnBattleManager;
-import com.simu.core.combat.queue.TurnQueue;
 import com.simu.core.contracts.*;
 import com.simu.core.entity.creature.Creature;
 import com.simu.core.enums.CreatureID;
@@ -20,9 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Hello world!
- */
 public class App {
     public static void main(String[] args) {
 

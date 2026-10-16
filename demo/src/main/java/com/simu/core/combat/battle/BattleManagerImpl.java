@@ -7,7 +7,6 @@ import com.simu.core.entity.move.Move;
 import com.simu.core.turn.TurnSelector;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 public class BattleManagerImpl implements BattleManager {
 

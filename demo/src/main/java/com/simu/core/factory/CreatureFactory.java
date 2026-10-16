@@ -75,10 +75,10 @@ public class CreatureFactory {
                         .defense(43)
                         .specialAttack(60)
                         .specialDefense(50)
-                        .speed(65)
+                        .speed(45)
                         .elementTypes(ElementType.WATER)
                         .moveManager(
-                                MoveID.TACKLE,
+                                MoveID.TACKLE, 
                                 MoveID.QUICK_ATTACK,
                                 MoveID.THUNDERBOLT,
                                 MoveID.IRON_TAIL)

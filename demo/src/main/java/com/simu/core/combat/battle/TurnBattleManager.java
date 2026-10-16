@@ -11,7 +11,6 @@ public class TurnBattleManager implements BattleManager {
     private final ConsoleLogger logger;
     private Creature creatureA;
     private Creature creatureB;
-    private boolean isReady = false;
 
     public TurnBattleManager(BattleQueue battleQueue, ConsoleLogger logger) {
         this.battleQueue = battleQueue;
