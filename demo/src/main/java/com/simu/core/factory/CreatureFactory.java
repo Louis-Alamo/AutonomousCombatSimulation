@@ -1,3 +1,4 @@
+
 package com.simu.core.factory;
 
 import com.simu.core.combat.component.health.StandarHealthComponentImpl;
@@ -23,11 +24,10 @@ public class CreatureFactory {
                         .speed(90)
                         .elementTypes(ElementType.ELECTRIC)
                         .moveManager(
-                            MoveID.THUNDERBOLT,
-                            MoveID.QUICK_ATTACK,
-                            MoveID.THUNDERBOLT,
-                            MoveID.IRON_TAIL
-                        )
+                                MoveID.THUNDERBOLT,
+                                MoveID.QUICK_ATTACK,
+                                MoveID.THUNDERBOLT,
+                                MoveID.IRON_TAIL)
                         .build();
             }
 
@@ -42,11 +42,10 @@ public class CreatureFactory {
                         .speed(65)
                         .elementTypes(ElementType.FIRE)
                         .moveManager(
-                            MoveID.SCRATCH,
-                            MoveID.EMBER,
-                            MoveID.FLAME_BURST,
-                            MoveID.BITE
-                        )
+                                MoveID.SCRATCH,
+                                MoveID.EMBER,
+                                MoveID.FLAME_BURST,
+                                MoveID.BITE)
                         .build();
             }
 
@@ -61,11 +60,10 @@ public class CreatureFactory {
                         .speed(65)
                         .elementTypes(ElementType.GRASS, ElementType.POISON)
                         .moveManager(
-                            MoveID.TACKLE,
-                            MoveID.VINE_WHIP,
-                            MoveID.RAZOR_LEAF,
-                            MoveID.SEED_BOMB
-                        )
+                                MoveID.TACKLE,
+                                MoveID.VINE_WHIP,
+                                MoveID.RAZOR_LEAF,
+                                MoveID.SEED_BOMB)
                         .build();
             }
 
@@ -80,11 +78,10 @@ public class CreatureFactory {
                         .speed(65)
                         .elementTypes(ElementType.WATER)
                         .moveManager(
-                            MoveID.TACKLE,
-                            MoveID.QUICK_ATTACK,
-                            MoveID.THUNDERBOLT,
-                            MoveID.IRON_TAIL
-                        )
+                                MoveID.TACKLE,
+                                MoveID.QUICK_ATTACK,
+                                MoveID.THUNDERBOLT,
+                                MoveID.IRON_TAIL)
                         .build();
             }
             default -> {

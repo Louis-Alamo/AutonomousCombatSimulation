@@ -14,7 +14,7 @@ public class StabCalculatorImpl implements StabCalculator {
         for (ElementType elementType : attacker.getElementTypes()) {
             if (elementType == moveElementType) {
 
-                return this.STAB_MULTIPLIER;
+                return StabCalculator.STAB_MULTIPLIER;
             }
         }
 

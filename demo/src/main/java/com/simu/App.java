@@ -1,19 +1,24 @@
 package com.simu;
 
 
+import com.simu.core.combat.battle.BattleManagerImpl;
+import com.simu.core.combat.battle.CombatManagerImpl;
 import com.simu.core.combat.battle.TurnBattleManager;
 import com.simu.core.combat.queue.TurnQueue;
-import com.simu.core.contracts.BattleManager;
-import com.simu.core.contracts.BattleQueue;
+import com.simu.core.contracts.*;
 import com.simu.core.entity.creature.Creature;
 import com.simu.core.enums.CreatureID;
 import com.simu.core.factory.CreatureFactory;
+import com.simu.core.service.DamageCalculatorService;
+import com.simu.core.service.StabCalculatorImpl;
+import com.simu.core.service.TypeEffectivenessCalculatorImpl;
+import com.simu.core.turn.SpeedTurnSelector;
+import com.simu.core.turn.TurnSelector;
 import com.simu.core.utils.ConsoleLogger;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Hello world!
@@ -38,15 +43,33 @@ public class App {
         creatures.forEach(Creature::creatureDataView);
 
 
-        BattleQueue battleQueue = new TurnQueue();
+        //Create dependencies
+        StabCalculator stabCalculator = new StabCalculatorImpl();
+        TypeEffectivenessCalculator typeEffectivenessCalculator = new TypeEffectivenessCalculatorImpl();
+        DamageCalculator damageCalculator = new DamageCalculatorService(stabCalculator, typeEffectivenessCalculator);
 
-        BattleManager battleManager = new TurnBattleManager(battleQueue, logger);
-        battleManager.addCombatants(creatures.get(0), creatures.get(1));
+        CombatManager combatManager = new CombatManagerImpl(damageCalculator);
+
+        TurnSelector turnSelector = new SpeedTurnSelector(
+                creatures.get(0),
+                creatures.get(1)
+        );
+
+        BattleManager battleManager = new BattleManagerImpl(
+                combatManager,
+                turnSelector,
+                new ArrayList<>(List.of(
+                            creatures.get(0),
+                            creatures.get(1)
+                    ))
+                );
+
         battleManager.startBattle();
 
-        logger.infolog("Execution finished.");
 
-        System.exit(0);
+
+
+
 
         /*
          *
