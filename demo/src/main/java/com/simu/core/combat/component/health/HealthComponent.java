@@ -1,6 +1,8 @@
 package com.simu.core.combat.component.health;
 
-public interface HealthComponent {
+import com.simu.core.event.CommandPublisher;
+
+public interface HealthComponent extends CommandPublisher {
 
     void onDamage();
 
