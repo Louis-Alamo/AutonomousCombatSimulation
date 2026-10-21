@@ -1,16 +1,18 @@
 package com.simu.core.logger;
 
-import com.simu.core.dao.EventLogger;
-import com.simu.core.event.Event;
+import com.simu.core.enums.LogType;
 
-public class ConsoleLogger implements AbstractLogger{
-    @Override
-    public void onEvent(Event event) {
 
-    }
+public class ConsoleLogger implements AbstractLogger {
+
 
     @Override
-    public void onEvent(EventLogger event) {
+    public void log(LogType logType, String message) {
 
+        System.out.println(
+                logType.getColor()
+                + message
+                + LogType.ANSI_RESET
+        );
     }
 }

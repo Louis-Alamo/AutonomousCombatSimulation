@@ -7,12 +7,13 @@ import com.simu.core.contracts.*;
 import com.simu.core.entity.creature.Creature;
 import com.simu.core.enums.CreatureID;
 import com.simu.core.factory.CreatureFactory;
+import com.simu.core.logger.AbstractLogger;
+import com.simu.core.logger.ConsoleLogger;
 import com.simu.core.service.DamageCalculatorService;
 import com.simu.core.service.StabCalculatorImpl;
 import com.simu.core.service.TypeEffectivenessCalculatorImpl;
 import com.simu.core.turn.SpeedTurnSelector;
 import com.simu.core.turn.TurnSelector;
-import com.simu.core.utils.ConsoleLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,7 @@ import java.util.Objects;
 public class App {
     public static void main(String[] args) {
 
-        ConsoleLogger logger = ConsoleLogger.getInstance();
-        logger.infolog("Execution started.");
+
 
         ArrayList<Creature> creatures = new ArrayList<>(
                 List.of(
@@ -33,12 +33,10 @@ public class App {
                 ));
 
 
-        logger.debugLog("Creatures created successfully");
-
         creatures.forEach(Creature::creatureDataView);
 
-
         //Create dependencies
+        AbstractLogger logger = new ConsoleLogger();
         StabCalculator stabCalculator = new StabCalculatorImpl();
         TypeEffectivenessCalculator typeEffectivenessCalculator = new TypeEffectivenessCalculatorImpl();
         DamageCalculator damageCalculator = new DamageCalculatorService(stabCalculator, typeEffectivenessCalculator);
