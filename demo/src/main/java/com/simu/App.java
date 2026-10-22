@@ -39,16 +39,18 @@ public class App {
         AbstractLogger logger = new ConsoleLogger();
         StabCalculator stabCalculator = new StabCalculatorImpl();
         TypeEffectivenessCalculator typeEffectivenessCalculator = new TypeEffectivenessCalculatorImpl();
-        DamageCalculator damageCalculator = new DamageCalculatorService(stabCalculator, typeEffectivenessCalculator);
+        DamageCalculator damageCalculator = new DamageCalculatorService(logger, stabCalculator, typeEffectivenessCalculator);
 
-        CombatManager combatManager = new CombatManagerImpl(damageCalculator);
+        CombatManager combatManager = new CombatManagerImpl(logger, damageCalculator);
 
         TurnSelector turnSelector = new SpeedTurnSelector(
+                logger,
                 creatures.get(0),
                 creatures.get(1)
         );
 
         BattleManager battleManager = new BattleManagerImpl(
+                logger,
                 combatManager,
                 turnSelector,
                 new ArrayList<>(List.of(

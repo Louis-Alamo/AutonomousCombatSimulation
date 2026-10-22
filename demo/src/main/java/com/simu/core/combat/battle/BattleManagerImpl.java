@@ -6,9 +6,11 @@ import com.simu.core.contracts.CombatManager;
 import com.simu.core.dao.AddSuscriberToComponents;
 import com.simu.core.entity.creature.Creature;
 import com.simu.core.entity.move.Move;
+import com.simu.core.enums.LogType;
 import com.simu.core.event.Event;
 import com.simu.core.event.Observer;
 import com.simu.core.event.event.CreatureDeadEvent;
+import com.simu.core.logger.AbstractLogger;
 import com.simu.core.turn.TurnSelector;
 
 import java.util.List;
@@ -18,11 +20,13 @@ public class BattleManagerImpl implements BattleManager, Observer {
     private final CombatManager combatManager;
     private final TurnSelector turnSelector;
     private final List<Creature> creatures;
+    private final AbstractLogger logger;
 
     private boolean isEndBattle = false;
 
 
-    public BattleManagerImpl(CombatManager combatManager, TurnSelector turnSelector, List<Creature> creatures) {
+    public BattleManagerImpl(AbstractLogger logger, CombatManager combatManager, TurnSelector turnSelector, List<Creature> creatures) {
+        this.logger = logger;
         this.combatManager = combatManager;
         this.turnSelector = turnSelector;
         this.creatures = creatures;
@@ -83,6 +87,8 @@ public class BattleManagerImpl implements BattleManager, Observer {
             creatureDefender = this.selectTarget(creatureAttacker);
             move = creatureAttacker.selectMove();
 
+            this.logger.log(LogType.BATTLE, "It's " + creatureAttacker.getCreatureName() + "'s turn");
+            this.logger.log(LogType.BATTLE, creatureAttacker.getCreatureName() + " used " + move.getMoveName() + " !");
 
             this.combatManager.attack(creatureAttacker, creatureDefender, move);
 
@@ -99,6 +105,7 @@ public class BattleManagerImpl implements BattleManager, Observer {
 
     @Override
     public void endBattle() {
+
         System.out.println("Ni perra idea alguien gano, quien? sabe?");
     }
 

@@ -5,16 +5,19 @@ import com.simu.core.contracts.StabCalculator;
 import com.simu.core.contracts.TypeEffectivenessCalculator;
 import com.simu.core.entity.creature.Creature;
 import com.simu.core.entity.move.Move;
+import com.simu.core.enums.LogType;
+import com.simu.core.logger.AbstractLogger;
 
 public class DamageCalculatorService implements DamageCalculator {
 
     private final StabCalculator stabCalculator;
     private final TypeEffectivenessCalculator typeEffectivenessCalculator;
+    private final AbstractLogger logger;
 
-    public DamageCalculatorService(StabCalculator stabCalculator,
-            TypeEffectivenessCalculator typeEffectivenessCalculator) {
+    public DamageCalculatorService(AbstractLogger logger, StabCalculator stabCalculator, TypeEffectivenessCalculator typeEffectivenessCalculator) {
         this.stabCalculator = stabCalculator;
         this.typeEffectivenessCalculator = typeEffectivenessCalculator;
+        this.logger = logger;
     }
 
     @Override
@@ -22,10 +25,29 @@ public class DamageCalculatorService implements DamageCalculator {
 
         double baseDamage = this.calculateDamageForTypeMove(attacker, target, move);
 
-        return baseDamage
-                * this.typeEffectivenessCalculator.calculateTypeMultiplier(target, move)
-                * this.stabCalculator.calculateStabMultiplier(attacker, move);
+        this.logger.log(LogType.DEBUG, move.getMoveName() + "'s base damage was " + baseDamage);
 
+        double typeMultiplier = this.typeEffectivenessCalculator.calculateTypeMultiplier(target, move);
+
+        double stabMultiplier = this.stabCalculator.calculateStabMultiplier(attacker, move);
+
+        double finalDamage =  baseDamage * typeMultiplier * stabMultiplier;
+
+
+        if (stabMultiplier > 1.0) {
+            this.logger.log(LogType.DEBUG, move.getMoveName() + " received the STAB bonus. Damage increased from " + baseDamage + " -> " + finalDamage);
+
+        }
+
+        if (typeMultiplier < 1.0) {
+            this.logger.log(LogType.BATTLE,  " It's not very effective...");
+
+        } else if (typeMultiplier > 2.0) {
+            this.logger.log(LogType.BATTLE, " It's super effective!");
+
+        }
+
+        return finalDamage;
     }
 
     private double calculateDamageForTypeMove(Creature attacker, Creature target, Move move) {
@@ -33,8 +55,7 @@ public class DamageCalculatorService implements DamageCalculator {
             case PHYSICAL ->
                 move.getMovePower() * (attacker.getAttack() / target.getDefense()) * DamageCalculator.SCALE_DAMAGE;
             case SPECIAL ->
-                move.getMovePower() * (attacker.getSpecialAttack() / target.getSpecialDefense())
-                        * DamageCalculator.SCALE_DAMAGE;
+                move.getMovePower() * (attacker.getSpecialAttack() / target.getSpecialDefense()) * DamageCalculator.SCALE_DAMAGE;
             case TRUE_DAMAGE -> move.getMovePower() * DamageCalculator.SCALE_DAMAGE;
             default -> 0.0;
         };

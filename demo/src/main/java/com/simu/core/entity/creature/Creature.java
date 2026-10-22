@@ -24,7 +24,7 @@ public class Creature {
 
 
     private String creatureName;
-    private ConsoleLogger logger;
+//    private ConsoleLogger logger;
 
     /**
      * Base atributes
@@ -56,7 +56,7 @@ public class Creature {
         this.elementTypes = builder.elementTypes;
         this.moveManager = builder.moveManager;
 
-        this.logger = ConsoleLogger.getInstance();
+//        this.logger = ConsoleLogger.getInstance();
     }
 
     public void creatureDataView(){
@@ -164,7 +164,7 @@ public class Creature {
          * this.getCurrentHealth() + " health");
          */
 
-        this.logger.battleLog("la creatura" + this.creatureName + " recibio daño");
+//        this.logger.battleLog("la creatura" + this.creatureName + " recibio daño");
         this.healthComponent.takeDamage(damage);
 
     }

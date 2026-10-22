@@ -1,17 +1,22 @@
 package com.simu.core.turn;
 
 import com.simu.core.entity.creature.Creature;
+import com.simu.core.enums.LogType;
+import com.simu.core.logger.AbstractLogger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SpeedTurnSelector implements TurnSelector {
 
     private List<Creature> creatures;
     private int roundCountIndex = 0;
     private boolean isSorted = false;
+    private final AbstractLogger logger;
 
-    public SpeedTurnSelector(Creature ...creatures) {
+    public SpeedTurnSelector(AbstractLogger logger, Creature ...creatures) {
+        this.logger = logger;
         this.creatures = new ArrayList<>(List.of(creatures));
     }
 
@@ -48,6 +53,13 @@ public class SpeedTurnSelector implements TurnSelector {
             this.creatures.set(bestIndex, creatureA);
 
         }
+
+        this.logger.log(
+                LogType.INFO,
+                "Turn order has been updated: "
+                        + this.creatures.stream().map(Creature::getCreatureName).collect(Collectors.joining(" -> "))
+        );
+
 
     }
 
