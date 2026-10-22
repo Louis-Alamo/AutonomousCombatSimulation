@@ -268,6 +268,9 @@ public class Creature {
      * Getters
      */
 
+    public  double getCurrentHealth() {
+        return this.healthComponent.getCurrentHealth();
+    }
 
     public double getAttack() {
         return this.attack;

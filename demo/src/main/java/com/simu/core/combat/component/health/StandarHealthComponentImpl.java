@@ -53,6 +53,7 @@ public class StandarHealthComponentImpl implements HealthComponent {
         return this.max_health;
     }
 
+    @Override
     public double getCurrentHealth() {
         return currentHealth;
     }

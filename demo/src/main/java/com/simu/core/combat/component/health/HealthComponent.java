@@ -12,4 +12,6 @@ public interface HealthComponent extends CommandPublisher {
 
     double getHealth();
 
+     double getCurrentHealth();
+
 }
