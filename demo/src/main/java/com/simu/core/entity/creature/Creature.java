@@ -6,6 +6,7 @@ import java.util.List;
 import com.simu.core.combat.component.health.HealthComponent;
 import com.simu.core.contracts.IBuilder;
 import com.simu.core.contracts.MoveManager;
+import com.simu.core.dao.AddSuscriberToComponents;
 import com.simu.core.enums.ElementType;
 import com.simu.core.entity.move.MoveManagerImpl;
 import com.simu.core.enums.MoveID;
@@ -23,7 +24,7 @@ public class Creature {
 
 
     private String creatureName;
-    private ConsoleLogger logger;
+//    private ConsoleLogger logger;
 
     /**
      * Base atributes
@@ -55,7 +56,7 @@ public class Creature {
         this.elementTypes = builder.elementTypes;
         this.moveManager = builder.moveManager;
 
-        this.logger = ConsoleLogger.getInstance();
+//        this.logger = ConsoleLogger.getInstance();
     }
 
     public void creatureDataView(){
@@ -163,9 +164,16 @@ public class Creature {
          * this.getCurrentHealth() + " health");
          */
 
-        this.logger.battleLog("la creatura" + this.creatureName + " recibio daño");
+//        this.logger.battleLog("la creatura" + this.creatureName + " recibio daño");
         this.healthComponent.takeDamage(damage);
 
+    }
+
+    public void addSubcribersToComponents(AddSuscriberToComponents addSuscriberToComponents) {
+
+        if (addSuscriberToComponents.componentClass() == HealthComponent.class) {
+            this.healthComponent.subscribe(addSuscriberToComponents.subscriber());
+        }
     }
 
 
@@ -253,6 +261,8 @@ public class Creature {
 //
 //        return randomNumber <= move.getAccuracy();
 //    }
+
+
 
     /**
      * Getters
@@ -344,7 +354,7 @@ public class Creature {
         private double specialAttack;
         private double specialDefense;
         private double speed;
-        private List<ElementType> elementTypes = new ArrayList<>();;
+        private List<ElementType> elementTypes = new ArrayList<>();
         private MoveManager moveManager;
 
         private boolean isAlive;
