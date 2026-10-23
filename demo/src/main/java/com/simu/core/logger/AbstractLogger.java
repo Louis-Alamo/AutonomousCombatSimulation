@@ -7,5 +7,7 @@ public interface AbstractLogger {
 
     void log(LogType logType, String message);
 
+    void saveData();
+
 
 }
