@@ -81,7 +81,7 @@ public class BattleManagerImpl implements BattleManager, Observer {
         Creature creatureDefender = null;
         Move move = null;
 
-        while (!this.isEndBattle) {
+        while (this.creaturesIsAlive()) {
 
             creatureAttacker = this.turnSelector.getNextComabatant();
             creatureDefender = this.selectTarget(creatureAttacker);
@@ -106,7 +106,14 @@ public class BattleManagerImpl implements BattleManager, Observer {
     @Override
     public void endBattle() {
 
-        System.out.println("Ni perra idea alguien gano, quien? sabe?");
+        Creature creatureWins = this.creatures.stream().filter(Creature::isAlive).findFirst().orElseThrow();
+
+        for (Creature creature: this.creatures) {
+            this.logger.log(LogType.DEBUG, creature.getCreatureName() + " remaining health is " + creature.getCurrentHealth());
+        }
+
+        this.logger.log(LogType.BATTLE, creatureWins.getCreatureName() + " won the battle!!!");
+
     }
 
 
@@ -114,7 +121,7 @@ public class BattleManagerImpl implements BattleManager, Observer {
     public void update(Event event) {
 
         if (event instanceof CreatureDeadEvent) {
-            this.isEndBattle = true;
+            //this.isEndBattle = true;
         }
     }
 
