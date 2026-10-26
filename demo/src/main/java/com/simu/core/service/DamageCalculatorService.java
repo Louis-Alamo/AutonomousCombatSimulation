@@ -53,11 +53,13 @@ public class DamageCalculatorService implements DamageCalculator {
     private double calculateDamageForTypeMove(Creature attacker, Creature target, Move move) {
         return switch (move.getCategory()) {
             case PHYSICAL ->
-                move.getMovePower() * (attacker.getAttack() / target.getDefense()) * DamageCalculator.SCALE_DAMAGE;
+                    ((DamageCalculator.SCALE_DAMAGE * move.getMovePower()) + 6 ) * ((2.0 * attacker.getAttack()) / (attacker.getAttack() + target.getDefense()));
+
+//                move.getMovePower() * (attacker.getAttack() / target.getDefense()) * DamageCalculator.SCALE_DAMAGE;
             case SPECIAL ->
-                move.getMovePower() * (attacker.getSpecialAttack() / target.getSpecialDefense()) * DamageCalculator.SCALE_DAMAGE;
+                    ((DamageCalculator.SCALE_DAMAGE * move.getMovePower()) + 6 ) * ((2.0 * attacker.getSpecialAttack()) / (attacker.getSpecialAttack() + target.getSpecialDefense()));
+//                move.getMovePower() * (attacker.getSpecialAttack() / target.getSpecialDefense()) * DamageCalculator.SCALE_DAMAGE;
             case TRUE_DAMAGE -> move.getMovePower() * DamageCalculator.SCALE_DAMAGE;
-            default -> 0.0;
         };
     }
 
