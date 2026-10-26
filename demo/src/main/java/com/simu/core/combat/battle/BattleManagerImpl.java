@@ -114,6 +114,8 @@ public class BattleManagerImpl implements BattleManager, Observer {
 
         this.logger.log(LogType.BATTLE, creatureWins.getCreatureName() + " won the battle!!!");
 
+        this.logger.saveData();
+
     }
 
 
