@@ -1,57 +1,70 @@
 package com.simu;
 
-import com.simu.core.combat.battle.TurnBattleManager;
-import com.simu.core.combat.contracts.BattleManager;
-import com.simu.core.combat.contracts.BattleQueue;
-import com.simu.core.combat.queue.TurnQueue;
-import com.simu.core.combat.test.MoveTestData;
-import com.simu.core.combat.factory.CreatureFactory;
-import com.simu.core.combat.creatures.Creature;
-import com.simu.core.combat.move.Move;
-import com.simu.core.combat.utils.ConsoleLogger;
+
+import com.simu.core.combat.battle.BattleManagerImpl;
+import com.simu.core.combat.battle.CombatManagerImpl;
+import com.simu.core.contracts.*;
+import com.simu.core.entity.creature.Creature;
+import com.simu.core.enums.CreatureID;
+import com.simu.core.factory.CreatureFactory;
+import com.simu.core.logger.AbstractLogger;
+import com.simu.core.logger.ConsoleLogger;
+import com.simu.core.service.DamageCalculatorService;
+import com.simu.core.service.StabCalculatorImpl;
+import com.simu.core.service.TypeEffectivenessCalculatorImpl;
+import com.simu.core.turn.SpeedTurnSelector;
+import com.simu.core.turn.TurnSelector;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
-/**
- * Hello world!
- */
 public class App {
     public static void main(String[] args) {
 
-        ConsoleLogger logger = ConsoleLogger.getInstance();
-        logger.infolog("Execution started.");
+
 
         ArrayList<Creature> creatures = new ArrayList<>(
                 List.of(
-                        CreatureFactory.createCreature("squirtle"),
-                        CreatureFactory.createCreature("charmander"),
-                        CreatureFactory.createCreature("pikachu"),
-                        CreatureFactory.createCreature("bulbasaur")));
+                        Objects.requireNonNull(CreatureFactory.createCreature(CreatureID.SQUIRTLE)),
+                        Objects.requireNonNull(CreatureFactory.createCreature(CreatureID.CHARMANDER)),
+                        Objects.requireNonNull(CreatureFactory.createCreature(CreatureID.PIKACHU)),
+                        Objects.requireNonNull(CreatureFactory.createCreature(CreatureID.BULBASAUR))
+                ));
 
-        for (Creature creature : creatures) {
-            creature.setMoves(MoveTestData.getMovesList(2));
 
-            logger.debugLog(creature.getCreatureName() + " has the following moves: "
-                    + creature.getMoves()
-                            .stream()
-                            .map(Move::getMoveName)
-                            .collect(Collectors.joining(" -> ")));
+        creatures.forEach(Creature::creatureDataView);
 
-        }
+        //Create dependencies
+        AbstractLogger logger = new ConsoleLogger();
+        StabCalculator stabCalculator = new StabCalculatorImpl();
+        TypeEffectivenessCalculator typeEffectivenessCalculator = new TypeEffectivenessCalculatorImpl();
+        DamageCalculator damageCalculator = new DamageCalculatorService(logger, stabCalculator, typeEffectivenessCalculator);
 
-        logger.debugLog("Creatures created successfully");
+        CombatManager combatManager = new CombatManagerImpl(logger, damageCalculator);
 
-        BattleQueue battleQueue = new TurnQueue();
+        TurnSelector turnSelector = new SpeedTurnSelector(
+                logger,
+                creatures.get(0),
+                creatures.get(1)
+        );
 
-        BattleManager battleManager = new TurnBattleManager(battleQueue, logger);
-        battleManager.addCombatants(creatures.get(0), creatures.get(1));
+        BattleManager battleManager = new BattleManagerImpl(
+                logger,
+                combatManager,
+                turnSelector,
+                new ArrayList<>(List.of(
+                            creatures.get(0),
+                            creatures.get(1)
+                    ))
+                );
+
         battleManager.startBattle();
 
-        logger.infolog("Execution finished.");
 
-        System.exit(0);
+
+
+
 
         /*
          *
