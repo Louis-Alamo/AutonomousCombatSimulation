@@ -4,9 +4,7 @@ import com.simu.abstracts.Application;
 import com.simu.tui.screen.DumbScreen;
 import com.simu.tui.screen.MenuScreen;
 
-import java.awt.*;
-
-public class RunTuiAPP {
+public class RunTuiApp {
 
     public static void main(String[] args)   {
         MenuScreen menu = new MenuScreen();
@@ -22,5 +20,6 @@ public class RunTuiAPP {
             System.out.println(e);
 
         }
+
     }
 }
