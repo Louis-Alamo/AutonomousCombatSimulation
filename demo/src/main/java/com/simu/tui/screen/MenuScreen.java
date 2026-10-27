@@ -27,11 +27,8 @@ import java.util.List;
 public class MenuScreen implements Screen {
 
 
-
-
     private ListState state = new ListState();
     private ListWidget listWidget;
-
 
 
     List<String> optionsMenu = new ArrayList<>(
@@ -51,6 +48,31 @@ public class MenuScreen implements Screen {
                 .highlightStyle(Style.EMPTY.reversed())
                 .highlightSymbol(">> ")
                 .build();
+    }
+
+
+
+    @Override
+    public boolean handleEvents(Event event) {
+
+        if (event instanceof KeyEvent keyEvent) {
+            if (keyEvent.code() == KeyCode.DOWN) {
+                this.state.selectNext(this.optionsMenu.size());
+                return true;
+
+            } else if (keyEvent.code() == KeyCode.UP) {
+                this.state.selectPrevious();
+                return true;
+
+            } else if (keyEvent.code() == KeyCode.ENTER) {
+
+                this.optionSelecterList(this.optionsMenu.get(this.state.selected()));
+
+            }
+
+        }
+
+        return false;
     }
 
 
@@ -105,20 +127,14 @@ public class MenuScreen implements Screen {
 
     }
 
-    @Override
-    public boolean handleEvents(Event event) {
-        if (event instanceof KeyEvent keyEvent) {
-            if (keyEvent.code() == KeyCode.DOWN) {
-                this.state.selectNext(this.optionsMenu.size());
-                return true;
 
-            } else if (keyEvent.code() == KeyCode.UP) {
-                this.state.selectPrevious();
-                return true;
-            }
+
+    public void optionSelecterList (String option) {
+
+        if (option.equalsIgnoreCase(this.optionsMenu.get(0))) {
 
         }
 
-        return false;
     }
+
 }

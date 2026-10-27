@@ -6,8 +6,9 @@ import dev.tamboui.tui.event.Event;
 
 public interface Screen {
 
+    boolean handleEvents (Event event);
 
     void show(Frame frame);
 
-    boolean handleEvents (Event event);
+
 }

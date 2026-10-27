@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Pikachu",
+    "hp": 100.0,
+    "attack": 55.0,
+    "defense": 40.0,
+    "specialAttack": 50.0,
+    "specialDefense": 50.0,
+    "speed": 90.0,
+    "elementTypes": [
+      "ELECTRIC"
+    ]
+  },
+  {
+    "name": "Charmander",
+    "hp": 100.0,
+    "attack": 52.0,
+    "defense": 43.0,
+    "specialAttack": 60.0,
+    "specialDefense": 50.0,
+    "speed": 65.0,
+    "elementTypes": [
+      "FIRE"
+    ]
+  },
+  {
+    "name": "Bulbasaur",
+    "hp": 100.0,
+    "attack": 49.0,
+    "defense": 49.0,
+    "specialAttack": 65.0,
+    "specialDefense": 65.0,
+    "speed": 45.0,
+    "elementTypes": [
+      "GRASS",
+      "POISON"
+    ]
+  },
+  {
+    "name": "Squirtle",
+    "hp": 100.0,
+    "attack": 48.0,
+    "defense": 65.0,
+    "specialAttack": 50.0,
+    "specialDefense": 64.0,
+    "speed": 43.0,
+    "elementTypes": [
+      "WATER"
+    ]
+  }
+]

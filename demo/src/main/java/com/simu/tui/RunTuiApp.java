@@ -3,6 +3,7 @@ package com.simu.tui;
 import com.simu.abstracts.Application;
 import com.simu.tui.screen.DumbScreen;
 import com.simu.tui.screen.MenuScreen;
+import com.simu.tui.screen.ScreenManager;
 
 public class RunTuiApp {
 
@@ -11,8 +12,8 @@ public class RunTuiApp {
         DumbScreen dumbScreen = new DumbScreen();
 
         try {
-
-            Application app = new ApplicationTUI(ScreenType.DUMB_SCREEN, menu, dumbScreen);
+            ScreenManager screenManager = new ScreenManager();
+            Application app = new ApplicationTUI(screenManager);
             app.execute();
 
         } catch (Exception e) {

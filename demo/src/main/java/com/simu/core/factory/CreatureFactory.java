@@ -6,6 +6,7 @@ import com.simu.core.entity.creature.*;
 import com.simu.core.enums.CreatureID;
 import com.simu.core.enums.ElementType;
 import com.simu.core.enums.MoveID;
+import com.simu.definition.CreatureDefinition;
 
 public class CreatureFactory {
 
@@ -90,4 +91,22 @@ public class CreatureFactory {
         }
 
     }
+
+    public static Creature createCreature(CreatureDefinition creatureDefinition) {
+
+        return new Creature.Builder()
+                .creatureName(creatureDefinition.name())
+                .healthComponent(new StandarHealthComponentImpl(creatureDefinition.hp()))
+                .attack(creatureDefinition.attack())
+                .defense(creatureDefinition.defense())
+                .specialAttack(creatureDefinition.specialAttack())
+                .specialDefense(creatureDefinition.specialDefense())
+                .speed(creatureDefinition.speed())
+                .elementTypes(
+                        creatureDefinition.elementTypes().toArray(ElementType[]::new)
+                )
+                .build();
+    }
+
+
 }

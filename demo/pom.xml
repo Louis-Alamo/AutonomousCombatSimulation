@@ -47,6 +47,12 @@
       <artifactId>tamboui-jline3-backend</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>tools.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>3.2.4</version>
+    </dependency>
+
     <!-- Tests -->
     <dependency>
       <groupId>junit</groupId>

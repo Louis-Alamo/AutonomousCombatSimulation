@@ -1,0 +1,155 @@
+[
+  {
+    "moveName": "Tackle",
+    "movePower": 40.0,
+    "category": "PHYSICAL",
+    "currenPP": 35,
+    "pp": 35,
+    "accuracy": 1.0,
+    "elementType": "NORMAL"
+  },
+  {
+    "moveName": "Scratch",
+    "movePower": 40.0,
+    "category": "PHYSICAL",
+    "currenPP": 35,
+    "pp": 35,
+    "accuracy": 1.0,
+    "elementType": "NORMAL"
+  },
+  {
+    "moveName": "Quick Attack",
+    "movePower": 40.0,
+    "category": "PHYSICAL",
+    "currenPP": 30,
+    "pp": 30,
+    "accuracy": 1.0,
+    "elementType": "NORMAL"
+  },
+  {
+    "moveName": "Headbutt",
+    "movePower": 70.0,
+    "category": "PHYSICAL",
+    "currenPP": 15,
+    "pp": 15,
+    "accuracy": 1.0,
+    "elementType": "NORMAL"
+  },
+  {
+    "moveName": "Ember",
+    "movePower": 40.0,
+    "category": "SPECIAL",
+    "currenPP": 25,
+    "pp": 25,
+    "accuracy": 1.0,
+    "elementType": "FIRE"
+  },
+  {
+    "moveName": "Flame Burst",
+    "movePower": 70.0,
+    "category": "SPECIAL",
+    "currenPP": 15,
+    "pp": 15,
+    "accuracy": 1.0,
+    "elementType": "FIRE"
+  },
+  {
+    "moveName": "Water Gun",
+    "movePower": 40.0,
+    "category": "SPECIAL",
+    "currenPP": 25,
+    "pp": 25,
+    "accuracy": 1.0,
+    "elementType": "WATER"
+  },
+  {
+    "moveName": "Bubble Beam",
+    "movePower": 65.0,
+    "category": "SPECIAL",
+    "currenPP": 20,
+    "pp": 20,
+    "accuracy": 1.0,
+    "elementType": "WATER"
+  },
+  {
+    "moveName": "Vine Whip",
+    "movePower": 45.0,
+    "category": "PHYSICAL",
+    "currenPP": 25,
+    "pp": 25,
+    "accuracy": 1.0,
+    "elementType": "GRASS"
+  },
+  {
+    "moveName": "Razor Leaf",
+    "movePower": 55.0,
+    "category": "PHYSICAL",
+    "currenPP": 25,
+    "pp": 25,
+    "accuracy": 0.95,
+    "elementType": "GRASS"
+  },
+  {
+    "moveName": "Seed Bomb",
+    "movePower": 80.0,
+    "category": "PHYSICAL",
+    "currenPP": 15,
+    "pp": 15,
+    "accuracy": 1.0,
+    "elementType": "GRASS"
+  },
+  {
+    "moveName": "Thunder Shock",
+    "movePower": 40.0,
+    "category": "SPECIAL",
+    "currenPP": 30,
+    "pp": 30,
+    "accuracy": 1.0,
+    "elementType": "ELECTRIC"
+  },
+  {
+    "moveName": "Thunderbolt",
+    "movePower": 90.0,
+    "category": "SPECIAL",
+    "currenPP": 15,
+    "pp": 15,
+    "accuracy": 1.0,
+    "elementType": "ELECTRIC"
+  },
+  {
+    "moveName": "Bite",
+    "movePower": 60.0,
+    "category": "PHYSICAL",
+    "currenPP": 25,
+    "pp": 25,
+    "accuracy": 1.0,
+    "elementType": "DARK"
+  },
+  {
+    "moveName": "Iron Tail",
+    "movePower": 100.0,
+    "category": "PHYSICAL",
+    "currenPP": 15,
+    "pp": 15,
+    "accuracy": 0.75,
+    "elementType": "STEEL"
+  },
+  {
+    "moveName": "Psychic",
+    "movePower": 90.0,
+    "category": "SPECIAL",
+    "currenPP": 10,
+    "pp": 10,
+    "accuracy": 1.0,
+    "elementType": "PSYCHIC"
+  },
+  {
+    "moveName": "Execution",
+    "movePower": 50.0,
+    "category": "TRUE_DAMAGE",
+    "currenPP": 5,
+    "pp": 5,
+    "accuracy": 1.0,
+    "elementType": "NORMAL"
+  }
+]
