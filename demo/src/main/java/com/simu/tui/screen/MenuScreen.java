@@ -3,10 +3,10 @@ package com.simu.tui.screen;
 
 
 import com.simu.abstracts.Screen;
+import com.simu.tui.util.AsciiLogos;
 import dev.tamboui.layout.Constraint;
 import dev.tamboui.layout.Layout;
 import dev.tamboui.layout.Rect;
-import dev.tamboui.style.Color;
 import dev.tamboui.style.Overflow;
 import dev.tamboui.style.Style;
 import dev.tamboui.terminal.Frame;
@@ -14,71 +14,20 @@ import dev.tamboui.text.Text;
 import dev.tamboui.tui.event.Event;
 import dev.tamboui.tui.event.KeyCode;
 import dev.tamboui.tui.event.KeyEvent;
-import dev.tamboui.widgets.block.Block;
-import dev.tamboui.widgets.block.Borders;
+
 import dev.tamboui.widgets.list.ListState;
 import dev.tamboui.widgets.list.ListWidget;
 import dev.tamboui.widgets.paragraph.Paragraph;
-import dev.tamboui.widgets.select.Select;
-import dev.tamboui.widgets.select.SelectState;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
 public class MenuScreen implements Screen {
 
-    /*
-    private static final String LOGO = """
-⡿⣡⣿⣿⡟⡼⡁⠁⣰⠂⡾⠉⢨⣿⠃⣿⡿⠍⣾⣟⢤⣿⢇⣿⢇⣿⣿⢿
-⣱⣿⣿⡟⡐⣰⣧⡷⣿⣴⣧⣤⣼⣯⢸⡿⠁⣰⠟⢀⣼⠏⣲⠏⢸⣿⡟⣿
-⣿⣿⡟⠁⠄⠟⣁⠄⢡⣿⣿⣿⣿⣿⣿⣦⣼⢟⢀⡼⠃⡹⠃⡀⢸⡿⢸⣿
-⣿⣿⠃⠄⢀⣾⠋⠓⢰⣿⣿⣿⣿⣿⣿⠿⣿⣿⣾⣅⢔⣕⡇⡇⡼⢁⣿⣿
-⣿⡟⠄⠄⣾⣇⠷⣢⣿⣿⣿⣿⣿⣿⣿⣭⣀⡈⠙⢿⣿⣿⡇⡧⢁⣾⣿⣿
-⣿⡇⠄⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⢻⠇⠄⠄⢿⣿⡇⢡⣾⣿⣿⣿
-⣿⣷⢰⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⢰⣧⣀⡄⢀⠘⡿⣰⣿⣿⣿⣿⣿
-⢹⣿⢸⣿⣿⠟⠻⢿⣿⣿⣿⣿⣿⣿⣿⣶⣭⣉⣤⣿⢈⣼⣿⣿⣿⣿⣿⣿
-⢸⠇⡜⣿⡟⠄⠄⠄⠈⠙⣿⣿⣿⣿⣿⣿⣿⣿⠟⣱⣻⣿⣿⣿⣿⣿⠟⠁
-⠄⣰⡗⠹⣿⣄⠄⠄⠄⢀⣿⣿⣿⣿⣿⣿⠟⣅⣥⣿⣿⣿⣿⠿⠋⠄⠄⣾
-⠜⠋⢠⣷⢻⣿⣿⣶⣾⣿⣿⣿⣿⠿⣛⣥⣾⣿⠿⠟⠛⠉⠄⠄
-""".stripTrailing();
-    */
 
-    private static final String REDUCED_BANNER = """
-         ·░▓▓▒░·
-        ·███▒··:·
-        ·▓██:                 ··:::░░░░░·
-         :▒▓▒·  ·:░▒▒▓▓▒▒▓▓██▓▓▓▒▒▒▓▓▓▓▓▓:
-          ··░░░▒▓▓▒▓███▓▒▒▒▓▓▓▓▓██▓▒▒▒▓▓▓▓░
-   ·░▒▒▓▓▓▓▒▓██▓▒▒▓▓███████████▓▒▒██▓▒▓▓▒▓▓:
-  ·░▒▓███▓▒███▒▓██▒▓█████████████▓▒▒██▓▓█▒▓▓·
-  :▒▓▒▒█▓▓██▓▒████░█████▓██████████▓▒▓█▓▒▓▓▒:
-  :▓▒▒░▒▓███▒▓████░██████▓▓██████▓▓▓▓▒▒██▓▒▒░:··
-  ░▒▓▒░▒███▓░█████░▒████░▓█▓▓▓▓█████▓▓▒▒▓▓▓░▒░·
-  :▒▒▒▒████▒▒████▓▓▒▓███▓░▒▓█▓▓▓▓▓▓▓▓▓▓▓▓▒▒▓███▓:
-   ░▒█░████░▒▓██▓▒██▓▒███▓▒█▓▓▓▓▓▓▓▓░░░▒▒▓▒▒▒▓▓██·
-  ·░▓▒▒███▓░▒█▓▒▒█████▓▓██▓▒██▓::::░░▒▒░▓███▒░▒▒▓░
- :::░▓███▓░▒▓▒░▓███▓▒▓██▓▓▓▓▒▓█▓▒░░::::░░▒███▓░▓▒:
-   ░███▓▒░▒░░▒▒██▒:·:▒██▓▒▒▓█████████▒▒▒░▒▓██▓▒▓▒
-  ░██▓░▒██▒░▒▒▒▒:·:▒██████████████████▓▒▒▒▒█▓▒▒:
-  ▒██░░███░▓▒░░:░▓██████████████████▓▒█▓▒▒▓▒▒▒·
-  ·▓▓░▒▒▓█▒▒▓▒▒▓▒████████████▓▒▓▓▒▒▓▒███▓▒░:░▒:
-    ::░▒▒▒▒▒▒▒▓██▒██████████▒▒█▓▓▓▓▓░██████▒·
-       ·▒▒░▓████▓░▒▒▒▒▒▒████░█▒▒▒▒▓██░▒░▒▓:·
-       ···▓█▒▒▒▒░▓▓▓▓▓▓▓░███░██▓▓▓███▓▓▓▓▓·
-           ··▒▓▓░▓██████▓░█████████████▓▓▓:
-            :▓▓▓▒▒▒▒▒▒▓█▓░█████████████▓▓▓:
-""".stripTrailing();
 
-    private static final String BRAILLE_BANNER = REDUCED_BANNER
-            .replace('·', '⠄')
-            .replace(':', '⣡')
-            .replace('░', '⣢')
-            .replace('▒', '⣇')
-            .replace('▓', '⣾')
-            .replace('█', '⣿');
 
     private ListState state = new ListState();
     private ListWidget listWidget;
@@ -127,30 +76,8 @@ public class MenuScreen implements Screen {
 
         Rect area = areas.getLast();
 
-        /*
-        Text logoText = Text.from(LOGO);
 
-        int logoWidth = Math.min(logoText.width(), area.width());
-        int logoHeight = Math.min(logoText.height(), area.height());
-
-        int x = area.x() + Math.max(0, (area.width() - logoWidth) / 2);
-        int y = area.y() + Math.max(0, (area.height() - logoHeight) / 2);
-
-        Rect logoArea = new Rect(x, y, logoWidth, logoHeight);
-
-
-        Paragraph logo = Paragraph.builder()
-                .text(logoText)
-                .overflow(Overflow.CLIP)
-                .build();
-
-        frame.renderWidget(logo, logoArea);
-        */
-
-        /* Permite volver al diseño anterior con sombreado si se desea.
-        Text reducedLogoText = Text.from(REDUCED_BANNER);
-        */
-        Text reducedLogoText = Text.from(BRAILLE_BANNER);
+        Text reducedLogoText = Text.from(AsciiLogos.CAT_BANNER_BRAILE);
 
         int reducedLogoWidth = Math.min(reducedLogoText.width(), area.width());
         int reducedLogoHeight = Math.min(reducedLogoText.height(), area.height());

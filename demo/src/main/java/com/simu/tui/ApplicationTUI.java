@@ -13,7 +13,6 @@ public class ApplicationTUI implements Application {
     private final ScreenType screenType;
     private final MenuScreen menuScreen;
     private final DumbScreen dumbScreen;
-
     public ApplicationTUI(ScreenType screenType, MenuScreen menuScreen, DumbScreen dumbScreen) {
         this.screenType = screenType;
         this.menuScreen = menuScreen;

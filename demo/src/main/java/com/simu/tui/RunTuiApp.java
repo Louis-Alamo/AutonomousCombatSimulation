@@ -12,7 +12,7 @@ public class RunTuiApp {
 
         try {
 
-            Application app = new ApplicationTUI(ScreenType.MENU, menu, dumbScreen);
+            Application app = new ApplicationTUI(ScreenType.DUMB_SCREEN, menu, dumbScreen);
             app.execute();
 
         } catch (Exception e) {
