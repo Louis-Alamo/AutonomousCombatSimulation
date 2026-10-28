@@ -5,13 +5,16 @@ import com.simu.tui.ScreenType;
 
 public class ScreenManager implements ScreenNavigator, ScreenProvider{
 
-    private ScreenType screenType;
     private Screen currentScreen;
+
+    public ScreenManager () {
+        this.navigateTo(ScreenType.MENU);
+    }
 
 
     @Override
     public void navigateTo(ScreenType screenType) {
-        switch (this.screenType)  {
+        switch (screenType)  {
 
             case MENU -> this.currentScreen = new MenuScreen();
 

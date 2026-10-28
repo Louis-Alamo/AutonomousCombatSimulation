@@ -5,9 +5,7 @@ import com.simu.controller.GameController;
 import com.simu.definition.CreatureFileReader;
 import com.simu.definition.MoveFileReader;
 import com.simu.tui.ApplicationTUI;
-import com.simu.tui.ScreenType;
-import com.simu.tui.screen.DumbScreen;
-import com.simu.tui.screen.MenuScreen;
+
 import com.simu.tui.screen.ScreenManager;
 
 import java.io.IOException;
@@ -28,11 +26,19 @@ public class App {
         //Make TUI interface
         ScreenManager screenManager = new ScreenManager();
 
-        Application app = new ApplicationTUI(screenManager);
+       Application app = new ApplicationTUI(screenManager);
 
+        try {
 
-        System.out.println(gameController.getCreaturesDefinition());
-        System.out.println(gameController.getMovesDefinition());
+            app.execute();
+
+        } catch (Exception e) {
+
+        }
+  
+
+        //System.out.println(gameController.getCreaturesDefinition());
+        //System.out.println(gameController.getMovesDefinition());
 
 
 

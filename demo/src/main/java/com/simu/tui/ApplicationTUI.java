@@ -1,8 +1,6 @@
 package com.simu.tui;
 
 import com.simu.abstracts.Application;
-import com.simu.tui.screen.DumbScreen;
-import com.simu.tui.screen.MenuScreen;
 import com.simu.tui.screen.ScreenManager;
 import dev.tamboui.terminal.Frame;
 import dev.tamboui.tui.TuiRunner;
