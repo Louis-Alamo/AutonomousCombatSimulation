@@ -3,6 +3,7 @@ package com.simu.tui.screen;
 
 
 import com.simu.abstracts.Screen;
+import com.simu.tui.ScreenType;
 import com.simu.tui.util.AsciiLogos;
 import dev.tamboui.layout.Constraint;
 import dev.tamboui.layout.Layout;
@@ -29,6 +30,7 @@ public class MenuScreen implements Screen {
 
     private ListState state = new ListState();
     private ListWidget listWidget;
+    private final ScreenNavigator screenNavigator;
 
 
     List<String> optionsMenu = new ArrayList<>(
@@ -40,7 +42,8 @@ public class MenuScreen implements Screen {
                     "Exit")
     );
 
-    public MenuScreen() {
+    public MenuScreen(ScreenNavigator screenNavigator) {
+        this.screenNavigator = screenNavigator;
         this.state.select(0);
 
          this.listWidget = ListWidget.builder()
@@ -65,8 +68,7 @@ public class MenuScreen implements Screen {
                 return true;
 
             } else if (keyEvent.code() == KeyCode.ENTER) {
-
-                this.optionSelecterList(this.optionsMenu.get(this.state.selected()));
+                return this.optionSelecterList(this.optionsMenu.get(this.state.selected()));
 
             }
 
@@ -99,7 +101,9 @@ public class MenuScreen implements Screen {
         Rect area = areas.getLast();
 
 
-        Text reducedLogoText = Text.from(AsciiLogos.CAT_BANNER_BRAILE);
+        //Text reducedLogoText = Text.from(AsciiLogos.CAT_BANNER_BRAILE);
+        Text reducedLogoText = Text.from("TAMBO UI && JAVA SE");
+
 
         int reducedLogoWidth = Math.min(reducedLogoText.width(), area.width());
         int reducedLogoHeight = Math.min(reducedLogoText.height(), area.height());
@@ -129,11 +133,13 @@ public class MenuScreen implements Screen {
 
 
 
-    public void optionSelecterList (String option) {
-
-        if (option.equalsIgnoreCase(this.optionsMenu.get(0))) {
-
+    public boolean optionSelecterList (String option) {
+        if (option.equalsIgnoreCase("IA vs IA")) {
+            this.screenNavigator.navigateTo(ScreenType.CREATURE_SELECTION_SCREEN);
+            return true;
         }
+
+        return false;
 
     }
 

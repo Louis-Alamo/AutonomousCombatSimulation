@@ -8,7 +8,7 @@ import com.simu.tui.screen.ScreenManager;
 public class RunTuiApp {
 
     public static void main(String[] args)   {
-        MenuScreen menu = new MenuScreen();
+        //MenuScreen menu = new MenuScreen();
         DumbScreen dumbScreen = new DumbScreen();
 
         try {

@@ -20,8 +20,14 @@ public class GameController {
     }
 
 
-    public List<CreatureDefinition> getCreaturesDefinition() throws IOException {
-        return this.creatureFileReader.read();
+    public List<CreatureDefinition> getCreaturesDefinition() {
+            try {
+                return creatureFileReader.read();
+            } catch (IOException exception) {
+                System.out.println("Failed to load creature definitions.");
+                return List.of();
+            }
+
     }
 
     public List<MoveDefinition> getMovesDefinition() throws IOException {

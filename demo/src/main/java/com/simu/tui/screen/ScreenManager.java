@@ -3,26 +3,35 @@ package com.simu.tui.screen;
 import com.simu.abstracts.Screen;
 import com.simu.tui.ScreenType;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ScreenManager implements ScreenNavigator, ScreenProvider{
 
     private Screen currentScreen;
+    private final Map<ScreenType, Screen> screenMap;
 
     public ScreenManager () {
-        this.navigateTo(ScreenType.MENU);
+        this.screenMap = new HashMap<>();
+        //this.navigateTo(ScreenType.MENU);
     }
 
 
     @Override
     public void navigateTo(ScreenType screenType) {
-        switch (screenType)  {
 
-            case MENU -> this.currentScreen = new MenuScreen();
+        this.currentScreen = this.screenMap.getOrDefault(screenType, new DumbScreen());
+        System.out.println("Se selecciono la interfaz");
 
-            case CREATURE_SELECTION_SCREEN -> this.currentScreen = new CreatureSelectionScreen();
-
-            default -> this.currentScreen = new DumbScreen();
-
-        }
+//        switch (screenType)  {
+//
+//            case MENU -> this.currentScreen = new MenuScreen();
+//
+//            case CREATURE_SELECTION_SCREEN -> this.currentScreen = new CreatureSelectionScreen();
+//
+//            default -> this.currentScreen = new DumbScreen();
+//
+//        }
 
     }
 
@@ -30,6 +39,16 @@ public class ScreenManager implements ScreenNavigator, ScreenProvider{
     public Screen currentScreen() {
 
         return this.currentScreen;
+    }
+
+
+    public void register (ScreenType screenType, Screen screen) {
+
+        if (screenType == null && screen == null) {
+            throw new IllegalArgumentException("Cannot register a null screen...");
+        }
+
+        this.screenMap.put(screenType, screen);
     }
 
 }
