@@ -1,21 +1,15 @@
 package com.simu;
 
 import com.simu.abstracts.Application;
-import com.simu.abstracts.Screen;
 import com.simu.controller.GameController;
 import com.simu.definition.CreatureFileReader;
 import com.simu.definition.MoveFileReader;
 import com.simu.tui.ApplicationTUI;
 
-import com.simu.tui.ScreenType;
-import com.simu.tui.screen.CreatureSelectionScreen;
-import com.simu.tui.screen.DumbScreen;
-import com.simu.tui.screen.MenuScreen;
-import com.simu.tui.screen.ScreenManager;
+import com.simu.tui.enums.ScreenType;
+import com.simu.tui.screen.*;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class App {
@@ -35,10 +29,11 @@ public class App {
         screenManager.register(ScreenType.DUMB_SCREEN, new DumbScreen());
         screenManager.register(ScreenType.MENU, new MenuScreen(screenManager));
         screenManager.register(ScreenType.CREATURE_SELECTION_SCREEN, new CreatureSelectionScreen(screenManager, gameController));
+        screenManager.register(ScreenType.MOVE_SELECTION_SCREEN, new MoveSelectionScreen(screenManager));
 
         //DEfinimos la pantalla principal
 
-        screenManager.navigateTo(ScreenType.CREATURE_SELECTION_SCREEN);
+        screenManager.navigateTo(ScreenType.MOVE_SELECTION_SCREEN);
 
 
        Application app = new ApplicationTUI(screenManager);

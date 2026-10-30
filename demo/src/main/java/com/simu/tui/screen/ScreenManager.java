@@ -1,7 +1,7 @@
 package com.simu.tui.screen;
 
 import com.simu.abstracts.Screen;
-import com.simu.tui.ScreenType;
+import com.simu.tui.enums.ScreenType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,7 @@ public class ScreenManager implements ScreenNavigator, ScreenProvider{
     public void navigateTo(ScreenType screenType) {
 
         this.currentScreen = this.screenMap.getOrDefault(screenType, new DumbScreen());
-        System.out.println("Se selecciono la interfaz");
+        System.out.println("Se selecciono la interfaz " + screenType);
 
 //        switch (screenType)  {
 //

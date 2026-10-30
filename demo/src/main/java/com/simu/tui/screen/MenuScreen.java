@@ -3,8 +3,7 @@ package com.simu.tui.screen;
 
 
 import com.simu.abstracts.Screen;
-import com.simu.tui.ScreenType;
-import com.simu.tui.util.AsciiLogos;
+import com.simu.tui.enums.ScreenType;
 import dev.tamboui.layout.Constraint;
 import dev.tamboui.layout.Layout;
 import dev.tamboui.layout.Rect;
