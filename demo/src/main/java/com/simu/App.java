@@ -7,7 +7,7 @@ import com.simu.definition.MoveFileReader;
 import com.simu.tui.ApplicationTUI;
 
 import com.simu.tui.enums.ScreenType;
-import com.simu.tui.screen.*;
+import com.simu.tui.view.screen.*;
 
 import java.io.IOException;
 

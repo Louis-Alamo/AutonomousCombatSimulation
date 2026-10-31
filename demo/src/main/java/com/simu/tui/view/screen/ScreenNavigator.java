@@ -1,4 +1,4 @@
-package com.simu.tui.screen;
+package com.simu.tui.view.screen;
 
 import com.simu.tui.enums.ScreenType;
 

@@ -1,6 +1,6 @@
-package com.simu.tui.screen;
+package com.simu.tui.view.screen;
 
-import com.simu.abstracts.Screen;
+import com.simu.tui.view.Screen;
 import dev.tamboui.layout.Alignment;
 import dev.tamboui.layout.Rect;
 import dev.tamboui.style.Overflow;

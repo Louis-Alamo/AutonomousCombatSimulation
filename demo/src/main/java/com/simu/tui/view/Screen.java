@@ -1,4 +1,4 @@
-package com.simu.abstracts;
+package com.simu.tui.view;
 
 import dev.tamboui.terminal.Frame;
 import dev.tamboui.tui.event.Event;

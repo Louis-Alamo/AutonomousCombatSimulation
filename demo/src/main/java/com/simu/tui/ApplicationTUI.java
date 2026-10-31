@@ -1,7 +1,8 @@
 package com.simu.tui;
 
 import com.simu.abstracts.Application;
-import com.simu.tui.screen.ScreenManager;
+import com.simu.tui.view.screen.ScreenManager;
+
 import dev.tamboui.terminal.Frame;
 import dev.tamboui.tui.TuiRunner;
 import dev.tamboui.tui.event.Event;

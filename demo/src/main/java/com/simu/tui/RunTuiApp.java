@@ -1,9 +1,9 @@
 package com.simu.tui;
 
 import com.simu.abstracts.Application;
-import com.simu.tui.screen.DumbScreen;
-import com.simu.tui.screen.MenuScreen;
-import com.simu.tui.screen.ScreenManager;
+import com.simu.tui.view.screen.DumbScreen;
+import com.simu.tui.view.screen.MenuScreen;
+import com.simu.tui.view.screen.ScreenManager;
 
 public class RunTuiApp {
 

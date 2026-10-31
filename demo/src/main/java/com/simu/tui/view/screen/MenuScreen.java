@@ -1,8 +1,8 @@
-package com.simu.tui.screen;
+package com.simu.tui.view.screen;
 
 
 
-import com.simu.abstracts.Screen;
+import com.simu.tui.view.Screen;
 import com.simu.tui.enums.ScreenType;
 import dev.tamboui.layout.Constraint;
 import dev.tamboui.layout.Layout;

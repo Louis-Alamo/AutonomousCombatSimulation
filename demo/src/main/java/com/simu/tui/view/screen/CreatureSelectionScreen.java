@@ -1,6 +1,6 @@
-package com.simu.tui.screen;
+package com.simu.tui.view.screen;
 
-import com.simu.abstracts.Screen;
+import com.simu.tui.view.Screen;
 import com.simu.controller.GameController;
 import com.simu.definition.CreatureDefinition;
 import dev.tamboui.layout.Alignment;
