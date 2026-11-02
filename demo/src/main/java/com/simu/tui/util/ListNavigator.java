@@ -34,6 +34,7 @@ public class ListNavigator<T> {
         return currentindex == index;
     }
     
-
-
+    public int size() {
+        return this.items.size();
+    }
 }

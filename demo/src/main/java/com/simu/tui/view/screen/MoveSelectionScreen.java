@@ -11,6 +11,7 @@ import dev.tamboui.style.Color;
 import dev.tamboui.style.Overflow;
 import dev.tamboui.terminal.Frame;
 import dev.tamboui.text.Text;
+import dev.tamboui.toolkit.elements.Panel;
 import dev.tamboui.tui.event.Event;
 import dev.tamboui.tui.event.KeyEvent;
 import dev.tamboui.widgets.block.Block;
@@ -23,6 +24,7 @@ import java.util.List;
 public class MoveSelectionScreen implements Screen {
 
     private final ScreenNavigator screenNavigator;
+    private final Panel queuePanel;
     private final FocusManager<MoveSelectionFocus> focusManager = new FocusManager<>(
         MoveSelectionFocus.class,
         MoveSelectionFocus.MAIN_CONTENT_PANEL
@@ -141,6 +143,7 @@ public class MoveSelectionScreen implements Screen {
                 : RectHelper.split(parentRec, percentage, cantElements, Direction.VERTICAL);
 
         String textElement = "[Water][Fire]";
+        
         for (int i = 0; i < creaturesNames.length; i++) {
 
             String text = creaturesNames[i];
